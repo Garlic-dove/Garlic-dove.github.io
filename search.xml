@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>“蒜鸟的blender，基本快捷键”</title>
+      <link href="/2025/10/26/%E2%80%9Cblender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B01%E2%80%9D/"/>
+      <url>/2025/10/26/%E2%80%9Cblender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B01%E2%80%9D/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Bender"><a href="#Bender" class="headerlink" title="Bender"></a>Bender</h1><p>作为一款免费又好玩的小游戏，blender让我们的空余时间更加充实。蒜了废话少说直接开始。</p><h1 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h1><p><strong>鼠标右键点击：对选中模型操作（着色等）</strong><br><strong>鼠标中键移动：旋转场景</strong><br><strong>shift+鼠标中键移动：平移场景</strong><br><strong>shift+鼠标右键点击：移动3D游标到</strong><br><strong>鼠标在场景边沿变成十字型点击并拖动可分屏场景。顶部‘+’添加布局可以恢复</strong><img src="/2025/10/26/%E2%80%9Cblender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B01%E2%80%9D/2.png" class=""></p><h1 id="基本快捷键"><a href="#基本快捷键" class="headerlink" title="基本快捷键"></a>基本快捷键</h1><h2 id="字母"><a href="#字母" class="headerlink" title="字母"></a>字母</h2><p><strong>X：删除模型</strong><br><strong>G：平移选中模型</strong><br><strong>S：放大缩小选中模型</strong><br><strong>R：旋转选中模型</strong><br><strong>G，S，R+X,Y,Z 在（以）x，y，z轴方向（为轴）操作（按俩次全局&#x2F;局部坐标轴切换）</strong></p><h2 id="shift-字母"><a href="#shift-字母" class="headerlink" title="shift+字母"></a>shift+字母</h2><p><strong>+A：添加新的基本模型（经纬球、圆锥、立方体等）</strong><br><strong>+C：使3D游标回到坐标（0，0）</strong><br><strong>+D：复制并移动模型</strong><br><strong>+S：定义3D游标和模型的位置</strong></p><h2 id="Ctrl-字符"><a href="#Ctrl-字符" class="headerlink" title="Ctrl+字符"></a>Ctrl+字符</h2><p><strong>+Z：撤消</strong><br><strong>+C&#x2F;V：复制&#x2F;粘贴模型</strong><br><strong>+空格：场景画面最大化</strong><br><strong>+L：关联模型材质</strong></p><h2 id="Alt-字母"><a href="#Alt-字母" class="headerlink" title="Alt+字母"></a>Alt+字母</h2><p><strong>+G模型回到初始坐标（0，0）</strong><br><strong>+S模型恢复初始大小</strong><br><strong>+R模型恢复初始角度（取消所有对模型的旋转操作）</strong></p><h2 id="数字小键盘"><a href="#数字小键盘" class="headerlink" title="数字小键盘"></a>数字小键盘</h2><div align="center"><img src="https://img.alicdn.com/bao/uploaded/i1/197780750/TB2uflFsmBYBeNjy0FeXXbnmFXa_!!197780750.jpg" height="300px" alt="小键盘" ></div><p><strong>0：切换摄像机视角</strong><br><strong>1：正视图（从y轴负方向）</strong><br><strong>3：右视图（从x轴正方向）</strong><br><strong>7：俯视图（从z轴正方向）</strong><br><strong>9：反转当前视图</strong><br><strong>5：切换当前视图为正交视图&#x2F;透视图</strong><br><strong>8、2、4、6：上下左右视角旋转15度</strong><br><strong>“.（Del）”：拉近距离观察选中模型</strong><br><strong>”&#x2F;“：隐藏其他模型观察选中模型</strong></p><h2 id="其他按键"><a href="#其他按键" class="headerlink" title="其他按键"></a>其他按键</h2><p><strong>F12：渲染</strong><br><strong>空格：开始播放</strong></p><img src="/2025/10/26/%E2%80%9Cblender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B01%E2%80%9D/3.jpg" class=""><h1 id="原点"><a href="#原点" class="headerlink" title="原点"></a>原点</h1><p>选中的模型中都有一个小点，是blender读取模型数据的节点（移动模型本质上是移动原点）。<br>场景页面右上角的“选项”可以选择对原点进行操作。</p><img src="/2025/10/26/%E2%80%9Cblender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B01%E2%80%9D/1.png" class=""><h1 id="成果"><a href="#成果" class="headerlink" title="成果"></a>成果</h1><p>知道以上操作，就可以完成一个简单的作品“珍珠女孩”了。</p><table><thead><tr><th align="center"><img src="/image/girl.jpg" alt="参考图"></th><th align="center"><img src="/image/girl.png" alt="蒜鸟的作品"></th></tr></thead></table><h1 id="One-day"><a href="#One-day" class="headerlink" title="One day"></a>One day</h1><p>蒜鸟笔记</p><img src="/2025/10/26/%E2%80%9Cblender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B01%E2%80%9D/1.avif" class="">]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Blender </tag>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>筑巢历程</title>
       <link href="/2025/10/17/%E7%AD%91%E5%B7%A2%E5%8E%86%E7%A8%8B/"/>
       <url>/2025/10/17/%E7%AD%91%E5%B7%A2%E5%8E%86%E7%A8%8B/</url>
