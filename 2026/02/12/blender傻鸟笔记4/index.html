@@ -1,0 +1,456 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>蒜鸟的blender，渲染的现实 | 蒜鸟的鸟巢</title><meta name="author" content="Garlic-dove"><meta name="copyright" content="Garlic-dove"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第四天，电脑最燃的一集">
+<meta property="og:type" content="article">
+<meta property="og:title" content="蒜鸟的blender，渲染的现实">
+<meta property="og:url" content="https://garlic-dove.github.io/2026/02/12/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B04/index.html">
+<meta property="og:site_name" content="蒜鸟的鸟巢">
+<meta property="og:description" content="第四天，电脑最燃的一集">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://t15.baidu.com/it/u=238217042,3050020367&fm=225&app=113&f=JPEG?w=1728&h=1080&s=36B57084D263BF471EF5DC8303007091">
+<meta property="article:published_time" content="2026-02-12T08:34:05.000Z">
+<meta property="article:modified_time" content="2026-02-20T05:37:37.140Z">
+<meta property="article:author" content="Garlic-dove">
+<meta property="article:tag" content="Blender">
+<meta property="article:tag" content="笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://t15.baidu.com/it/u=238217042,3050020367&fm=225&app=113&f=JPEG?w=1728&h=1080&s=36B57084D263BF471EF5DC8303007091"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "蒜鸟的blender，渲染的现实",
+  "url": "https://garlic-dove.github.io/2026/02/12/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B04/",
+  "image": "https://t15.baidu.com/it/u=238217042,3050020367&fm=225&app=113&f=JPEG?w=1728&h=1080&s=36B57084D263BF471EF5DC8303007091",
+  "datePublished": "2026-02-12T08:34:05.000Z",
+  "dateModified": "2026-02-20T05:37:37.140Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Garlic-dove",
+      "url": "https://garlic-dove.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/image/ss.jpg"><link rel="canonical" href="https://garlic-dove.github.io/2026/02/12/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B04/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//www.clarity.ms"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?8b7a940f932af656bd51538c1716c577";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+btf.addGlobalFn('pjaxComplete', () => {
+  _hmt.push(['_trackPageview',window.location.pathname])
+}, 'baidu_analytics')
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-5E0P16XE8R"></script><script>window.dataLayer = window.dataLayer || []
+function gtag(){dataLayer.push(arguments)}
+gtag('js', new Date())
+gtag('config', 'G-5E0P16XE8R')
+btf.addGlobalFn('pjaxComplete', () => {
+  gtag('config', 'G-5E0P16XE8R', {'page_path': window.location.pathname})
+}, 'google_analytics')
+</script><script>(function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "tsgv6t9ion");
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":true,"pagination":{"enable":true,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '蒜鸟的blender，渲染的现实',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><style type="text/css">#toggle-sidebar {bottom: 80px}</style><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/image/doro.gif" data-lazy-src="/image/gg.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://t15.baidu.com/it/u=238217042,3050020367&amp;fm=225&amp;app=113&amp;f=JPEG?w=1728&amp;h=1080&amp;s=36B57084D263BF471EF5DC8303007091);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/image/doro.gif" data-lazy-src="/image/nn.gif" alt="Logo"><span class="site-name">蒜鸟的鸟巢</span></a><a class="nav-page-title" href="/"><span class="site-name">蒜鸟的blender，渲染的现实</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">蒜鸟的blender，渲染的现实</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-02-12T08:34:05.000Z" title="发表于 2026-02-12 16:34:05">2026-02-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-02-20T05:37:37.140Z" title="更新于 2026-02-20 13:37:37">2026-02-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="材质的渲染"><a href="#材质的渲染" class="headerlink" title="材质的渲染"></a>材质的渲染</h1><p>在渲染的着色方式下不选场景效果：预览打光拉满下的材质效果<br>渲染引擎：Eevee和Cycles<br>Cycles设置简单直观，渲染的更细致</p>
+<h2 id="基础认知"><a href="#基础认知" class="headerlink" title="基础认知"></a>基础认知</h2><p>PBR（Physically Based Rendering）：基于物理的渲染<br>BRDF（Bidirectional Reflectance Distribution  Function）：双向散射分布函数<br>Disney Principled BRDF：迪士尼原则的BRDF<br>BSDF&#x3D;BRDF（反射）+BTDF（散射）<br>菲尼尔效应：远看水不见底，近处水清澈见底</p>
+<h2 id="材质基础"><a href="#材质基础" class="headerlink" title="材质基础"></a>材质基础</h2><ul>
+<li>在材质属性点击新建</li>
+</ul>
+<p><strong>物体模式</strong></p>
+<img src="/image/doro.gif" data-lazy-src="/2026/02/12/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B04/1.png" class="">
+<ul>
+<li>1处更换添加过的材质</li>
+<li>3处的“+”创建新材质，“-”删除选择材质<blockquote>
+<p>如果一个材质没有被任何模型使用，那么它的名称前面会多个0，这种材质不会被Ctrl+S保存，在没有点亮2处的情况下在关闭blender会被删除。</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>编辑模式</strong></p>
+<img src="/image/doro.gif" data-lazy-src="/2026/02/12/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B04/2.png" class="">
+<ul>
+<li>指定：选中部分指定材质</li>
+<li>选择：选择和选中部分相同材质的所有区域</li>
+<li>弃选：弃选和选中部分相同材质的所有区域</li>
+</ul>
+<hr>
+<p>当一个模型有多个材质，总体默认为用第一个材质</p>
+<h2 id="着色器编辑器"><a href="#着色器编辑器" class="headerlink" title="着色器编辑器"></a>着色器编辑器</h2><p>该界面也可以增减材质<br>Shift+F3切换，可以拖出页面分屏查看，出现材质模块——原理化BSDF和材质输出</p>
+<blockquote>
+<h3 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h3><p>断开节点之间的连接除直接鼠标拖动，Ctrl+鼠标右键滑动可以直接切断连接<br>Ctrl+Shift+鼠标左键点击着色器：快速连接材质输出和着色器<br>Shift+P：框选节点整合为功能模块集合</p>
+<h3 id="原理化BSDF"><a href="#原理化BSDF" class="headerlink" title="原理化BSDF"></a>原理化BSDF</h3><p><strong>基础色<br>金属度<br>糙度<br>折射率(IRO)<br>Alpha</strong>：物体的透明程度<br>漫射<br>次表面：材质的透光属性（皮肤透光变色）</p>
+<blockquote>
+<p>半径：透光距离</p>
+</blockquote>
+<p>高光  </p>
+<blockquote>
+<p>各向异性过滤：反光集中程度<br>各向异性旋转：反光集中程度的方向<br>（金属球的圆环反光和塑料球的圆形反光）</p>
+</blockquote>
+<p><strong>透射<br>涂层</strong><br>边缘光泽<br><strong>自发光</strong>：让物体自身发光<br>薄膜</p>
+</blockquote>
+<h3 id="纹理"><a href="#纹理" class="headerlink" title="纹理"></a>纹理</h3><p>在着色器编辑器界面Shift+A添加功能模块<br><strong>功能模块</strong></p>
+<ul>
+<li>纹理：可以添加多种纹理</li>
+<li>映射（实用工具&rarr;矢量）：负责调整材质位置的旋转和缩放<ul>
+<li>类型：点、纹理、矢量、法向</li>
+<li>X、Y、Z（位置、<strong>旋转、缩放</strong>）：改变纹理位置<blockquote>
+<p>点：纹理随原点移动<br>纹理：直接控制纹理<br>矢量：只变换方向<br>法向：以一条轴旋转覆盖纹理</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>纹理坐标（输入）：告诉计算机用什么坐标系来映射<ul>
+<li><strong>生成</strong>：以全局坐标进行映射</li>
+<li><strong>物体</strong>：以局部坐标进行映射，默认以物体原点作为(0,0)，也可以吸取一个物体作为(0,0)，(0,0)移动映射覆盖的地方也会移动</li>
+<li><strong>UV</strong>：把模型展开为2D平面，从材质上取合适的部分映射到模型的展开部分，在拼接成模型</li>
+<li>法向：以坐标轴为轴旋转映射</li>
+<li>摄像机：在摄像机视角映射</li>
+<li>窗口：映射平面纹理，当前视角上的模型视图平面作为窗口</li>
+<li>反射：把纹理放在模型周围，模型表面以镜像反射纹理<blockquote>
+<p>图像纹理：将图像文件作为纹理进行采样<br>投射图像方式：</p>
+<ul>
+<li>平直：以平面形式映射</li>
+<li>方框：以长方体的方式映射</li>
+<li>球形：以长球体的方式映射</li>
+<li>管形：以柱体的方式映射<br>添加图像纹理功能模块连接：</li>
+</ul>
+<p>纹理坐标（映射方式）&rarr;（矢量）映射（矢量）&rarr;（矢量）纹理（颜色）&rarr;（基础色）原理化BSDF</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>程序化纹理</strong>：纹理和其他模块相互作用形成真实的材质</p>
+<blockquote>
+<p>噪波纹理（颜色）&rarr;（系数）颜色渐变（颜色）&rarr;（<strong>基础色&#x2F;糙度</strong>）原理化BSDF<br>同时连接后，颜色越深的部分糙度越小，即更光滑（黑色糙度为0）</p>
+</blockquote>
+<h3 id="颜色"><a href="#颜色" class="headerlink" title="颜色"></a>颜色</h3><p><strong>功能模块</strong></p>
+<ul>
+<li>颜色渐变（颜色）：可以添加多种颜色并改变渐变的方式</li>
+<li>分离X、Y、Z：（实用工具&rarr;矢量）：只取一个轴的值，其他的轴取零<blockquote>
+<p>纹理坐标（映射方式）&rarr;（矢量）映射（矢量）&rarr;（矢量）分离X、Y、Z（分离的轴）&rarr;（系数）颜色渐变（颜色）&rarr;（基础色）原理化BSDF</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="混合和凹凸"><a href="#混合和凹凸" class="headerlink" title="混合和凹凸"></a>混合和凹凸</h3><p><strong>功能模块</strong></p>
+<ul>
+<li>置换（置换）：功能类似置换修改器，但是需要黑白图片输入</li>
+<li>混合（实用工具&rarr;运算）：<strong>颜色</strong>功能，通过调节系数来控制A和B的输入程度，系数越小越接近A输入的值，越大则约接近B的值<blockquote>
+<p>在blender里，黑色为0，白色为1，说明系数越接近0，颜色越接近黑色，把一张黑白图像用图像纹理输入到混合的系数，则黑色部分会显示A输入的内容，白色会输入B的内容。（颜色渐变同理，也可以改变颜色）</p>
+<blockquote>
+<p>图像纹理（颜色）&rarr;（系数&#x2F;A&#x2F;B）混合（结果）&rarr;（基础色）原理化BSDF</p>
+</blockquote>
+</blockquote>
+</li>
+<li>凹凸（置换）：将黑与白输入到高度控制点视角上的高低感<ul>
+<li>反转：黑和白代表的参数互换</li>
+<li>强度：控制凹凸程度</li>
+<li>距离：微调凹凸程度<blockquote>
+<p>原理：通过改变模型点的法向（旋转法向R+N）来模拟出凹凸感，单纯的法向图会呈现红绿蓝（RGB）三原色，在计算机中用三原色来设置X、Y、Z的值<br>这是伪凹凸，模型并没有形变，需要添加形变</p>
+<blockquote>
+<p>噪波纹理（系数）&rarr;（系数）颜色渐变（颜色）&rarr;（高度）凹凸（法向）&rarr;（法向）原理化BSDF</p>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>原理化BSDF（着色器）</li>
+<li>混合着色器（着色器）：功能和混合类似，但是输入的是着色器（类型）</li>
+</ul>
+<p><strong>凹凸纹理</strong><br>需要模型有足够多的细分点；有两种方法，第二种方法更消耗电脑资源，大型项目下不推荐</p>
+<blockquote>
+<p>纹理坐标（映射方式）&rarr;（矢量）映射（矢量）&rarr;（矢量）<strong>图像纹理</strong>×3（颜色）&rarr;（参数×3）原理化BSDF<br><strong>图像纹理</strong>&rarr;<strong>（参数）</strong></p>
+<ol>
+<li>材质彩图&rarr;（基础色）</li>
+<li>材质糙度图&rarr;（糙度）</li>
+<li>材质法向图&rarr;（法向）</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="center">彩图</th>
+<th align="center">糙度图</th>
+<th align="center">法向图</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="/image/doro.gif" data-lazy-src="/2026/02/12/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B04/1.jpg" class=""></td>
+<td align="center"><img src="/image/doro.gif" data-lazy-src="/2026/02/12/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B04/2.jpg" class=""></td>
+<td align="center"><img src="/image/doro.gif" data-lazy-src="/2026/02/12/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B04/3.jpg" class=""></td>
+</tr>
+<tr>
+<td align="center">材质黑白图</td>
+<td align="center"><img src="/image/doro.gif" data-lazy-src="/2026/02/12/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B04/4.jpg" class=""></td>
+<td align="center">用来控制材质形变程度</td>
+</tr>
+</tbody></table>
+</blockquote>
+<ol>
+<li><p>用置换修改器</p>
+<blockquote>
+<p>添加置换修改器，使用材质黑白图</p>
+</blockquote>
+</li>
+<li><p>添加置换节点</p>
+<blockquote>
+<p>需要把<u>材质&rarr;设置&rarr;表(曲)面&rarr;置换</u>改为置换与凹凸<br>多连接一个图像纹理（材质黑白图）：<br>纹理坐标（映射方式）&rarr;（矢量）映射（矢量）&rarr;（矢量）图像纹理（颜色）&rarr;（高度）置换（置换）&rarr;（置换）材质输出</p>
+</blockquote>
+</li>
+</ol>
+<p><strong>Node Wrangler插件</strong><br>Ctrl+T：添加图像纹理、映射和纹理坐标<br>Ctrl+Shift+鼠标左键：把一个节点直接连接到输出上预览<br>Ctrl+Shift+T：打开目录，选择材质四图确定后，可以快速运用方法2创建材质<br>Ctrl+Shift+鼠标右键拖拉：快速添加一个混合着色器节点<br>Alt+S：快速切换混合节点的输入的上下顺序</p>
+<h2 id="纹理绘制"><a href="#纹理绘制" class="headerlink" title="纹理绘制"></a>纹理绘制</h2><p>在模型上进行绘画操作<br><strong>一些快捷键</strong><br>F+鼠标右键拖动：放缩画笔粗细<br>X：切换选择颜色（共可选择两种颜色）<br><strong>画笔模式</strong>  </p>
+<blockquote>
+<p>笔刷：涂画模型<br>模糊：柔化边缘<br>涂抹：拉出颜色<br>克隆：在当前视角下，用游标所在区域的颜色进行涂抹上色<br><strong>填充</strong>：将颜色填充到选中区域，在该模式下的颜色梯度渐变才最有效  </p>
+</blockquote>
+<p><strong>工具</strong><br>并非专业绘画软件，工具相对较少，这里只讲几个。  </p>
+<blockquote>
+<p>调色板：点击“+”可以存储需要颜色，点击“-”删除<br>笔画 &gt; 描画方式：有点、喷枪、拖拽点等，其中曲线需要Ctrl+鼠标右键进行使用</p>
+</blockquote>
+<h3 id="UV绘制"><a href="#UV绘制" class="headerlink" title="UV绘制"></a>UV绘制</h3><p>UV编辑器：观察3D模型的平面展开图<br><strong>展开图</strong><br>拆模型的UV展开图：正常的正方体可以自动展开为6个正方形，但是面对复杂的模型，自动拆分的UV图一般是不能用的，需要调整</p>
+<blockquote>
+<ol>
+<li>智能拆解：<br>Tab+A&rarr;U&rarr;选择智能UV投射<blockquote>
+<p>该功能一般够用，但是拆出的展开图很碎</p>
+</blockquote>
+</li>
+<li>直接拆解：<br>Tab+A&rarr;（Alt）选择一条线&rarr;U&rarr;选择标记缝合边&rarr;A&rarr;U&rarr;选择展开<blockquote>
+<p>更容易拆分比较对称的模型，UV视图直观清楚</p>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<p><strong>上色技巧</strong><br>编辑模式下选择部分面，切换到纹理绘制后勾选<strong>绘制遮置</strong>，可以上色选择区域遮盖其他区域<img src="/image/doro.gif" data-lazy-src="/2026/02/12/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B04/3.png" class=""></p>
+<h1 id="Four-day"><a href="#Four-day" class="headerlink" title="Four day"></a>Four day</h1><p>蒜鸟笔记<br><img src="/image/doro.gif" data-lazy-src="/image/23.avif"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://garlic-dove.github.io">Garlic-dove</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://garlic-dove.github.io/2026/02/12/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B04/">https://garlic-dove.github.io/2026/02/12/blender傻鸟笔记4/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://garlic-dove.github.io" target="_blank">蒜鸟的鸟巢</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Blender/">Blender</a><a class="post-meta__tags" href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a></div><div class="post-share"><div class="social-share" data-image="https://t15.baidu.com/it/u=238217042,3050020367&amp;fm=225&amp;app=113&amp;f=JPEG?w=1728&amp;h=1080&amp;s=36B57084D263BF471EF5DC8303007091" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>投喂蒜鸟</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/image/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/image/doro.gif" data-lazy-src="/image/wechat.jpg" alt="感谢投喂！"/></a><div class="post-qr-code-desc">感谢投喂！</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/01/31/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B03/" title="蒜鸟的blender，蒜鸟妙妙窝"><img class="cover" src="/image/doro.gif" data-lazy-src="https://prod-xsuperzone-static.obs.cn-east-3.myhuaweicloud.com/webConsole/static/images/3113701782aa41b69c63e1b6a9c56248.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">蒜鸟的blender，蒜鸟妙妙窝</div></div><div class="info-2"><div class="info-item-1">第三天：终于放假了，来玩玩游戏放松一下</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/11/10/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B02/" title="蒜鸟的blender，奇妙的编辑"><img class="cover" src="/image/doro.gif" data-lazy-src="https://store-images.s-microsoft.com/image/apps.40089.13546604597911677.4d22b406-abea-478f-a927-e2687ad6bed3.69c3e902-379e-4db7-9cdc-aa7d835f9151?mode=scale&q=90&h=1080&w=1920" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-10</div><div class="info-item-2">蒜鸟的blender，奇妙的编辑</div></div><div class="info-2"><div class="info-item-1">第二天：玩游戏就玩Blender</div></div></div></a><a class="pagination-related" href="/2025/10/26/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B01/" title="蒜鸟的blender，基本快捷键"><img class="cover" src="/image/doro.gif" data-lazy-src="https://www.xue8nav.com/wp-content/uploads/how-to-learn-blender.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-26</div><div class="info-item-2">蒜鸟的blender，基本快捷键</div></div><div class="info-2"><div class="info-item-1">第一天：Blender是一款好玩的游戏</div></div></div></a><a class="pagination-related" href="/2026/01/31/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B03/" title="蒜鸟的blender，蒜鸟妙妙窝"><img class="cover" src="/image/doro.gif" data-lazy-src="https://prod-xsuperzone-static.obs.cn-east-3.myhuaweicloud.com/webConsole/static/images/3113701782aa41b69c63e1b6a9c56248.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-01-31</div><div class="info-item-2">蒜鸟的blender，蒜鸟妙妙窝</div></div><div class="info-2"><div class="info-item-1">第三天：终于放假了，来玩玩游戏放松一下</div></div></div></a><a class="pagination-related" href="/2026/01/19/php%E5%91%BD%E4%BB%A42/" title="简单的php命令（二）"><img class="cover" src="/image/doro.gif" data-lazy-src="/image/20.avif" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-01-19</div><div class="info-item-2">简单的php命令（二）</div></div><div class="info-2"><div class="info-item-1">继续简单学点php命令执行</div></div></div></a><a class="pagination-related" href="/2025/11/20/%E8%AE%A4%E8%AF%86Web/" title="对Web的初次攻略"><img class="cover" src="/image/doro.gif" data-lazy-src="/image/9.avif" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-20</div><div class="info-item-2">对Web的初次攻略</div></div><div class="info-2"><div class="info-item-1">菜鸟的日常罢了</div></div></div></a><a class="pagination-related" href="/2025/12/14/php%E5%91%BD%E4%BB%A41/" title="简单的php命令（一）"><img class="cover" src="/image/doro.gif" data-lazy-src="/image/2.avif" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-14</div><div class="info-item-2">简单的php命令（一）</div></div><div class="info-2"><div class="info-item-1">简单学点php命令执行</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/image/doro.gif" data-lazy-src="/image/gg.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Garlic-dove</div><div class="author-info-description">味大的鸽子</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Garlic-dove/Garlic-dove.github.io"><i class="fab fa-github"></i><span>我的 Github</span></a><div class="card-info-social-icons"><a class="social-icon" href="mailto:m19229112452@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><img src="/image/doro.gif" data-lazy-src="/image/9.jpg" style="height:17em; vertical-align:middle;"> <strong><img src="/image/doro.gif" data-lazy-src="/image/10.jpg" style="height:14em; vertical-align:middle;"> <strong>平平无奇的一只鸟和他味大的鸟窝</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9D%90%E8%B4%A8%E7%9A%84%E6%B8%B2%E6%9F%93"><span class="toc-number">1.</span> <span class="toc-text">材质的渲染</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5"><span class="toc-number">1.1.</span> <span class="toc-text">基础认知</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%90%E8%B4%A8%E5%9F%BA%E7%A1%80"><span class="toc-number">1.2.</span> <span class="toc-text">材质基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9D%80%E8%89%B2%E5%99%A8%E7%BC%96%E8%BE%91%E5%99%A8"><span class="toc-number">1.3.</span> <span class="toc-text">着色器编辑器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">1.3.1.</span> <span class="toc-text">快捷键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%90%86%E5%8C%96BSDF"><span class="toc-number">1.3.2.</span> <span class="toc-text">原理化BSDF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%B9%E7%90%86"><span class="toc-number">1.3.3.</span> <span class="toc-text">纹理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%9C%E8%89%B2"><span class="toc-number">1.3.4.</span> <span class="toc-text">颜色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B7%E5%90%88%E5%92%8C%E5%87%B9%E5%87%B8"><span class="toc-number">1.3.5.</span> <span class="toc-text">混合和凹凸</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%B9%E7%90%86%E7%BB%98%E5%88%B6"><span class="toc-number">1.4.</span> <span class="toc-text">纹理绘制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UV%E7%BB%98%E5%88%B6"><span class="toc-number">1.4.1.</span> <span class="toc-text">UV绘制</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Four-day"><span class="toc-number">2.</span> <span class="toc-text">Four day</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/02/12/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B04/" title="蒜鸟的blender，渲染的现实"><img src="/image/doro.gif" data-lazy-src="https://t15.baidu.com/it/u=238217042,3050020367&amp;fm=225&amp;app=113&amp;f=JPEG?w=1728&amp;h=1080&amp;s=36B57084D263BF471EF5DC8303007091" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="蒜鸟的blender，渲染的现实"/></a><div class="content"><a class="title" href="/2026/02/12/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B04/" title="蒜鸟的blender，渲染的现实">蒜鸟的blender，渲染的现实</a><time datetime="2026-02-12T08:34:05.000Z" title="发表于 2026-02-12 16:34:05">2026-02-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/01/31/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B03/" title="蒜鸟的blender，蒜鸟妙妙窝"><img src="/image/doro.gif" data-lazy-src="https://prod-xsuperzone-static.obs.cn-east-3.myhuaweicloud.com/webConsole/static/images/3113701782aa41b69c63e1b6a9c56248.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="蒜鸟的blender，蒜鸟妙妙窝"/></a><div class="content"><a class="title" href="/2026/01/31/blender%E5%82%BB%E9%B8%9F%E7%AC%94%E8%AE%B03/" title="蒜鸟的blender，蒜鸟妙妙窝">蒜鸟的blender，蒜鸟妙妙窝</a><time datetime="2026-01-31T07:22:06.000Z" title="发表于 2026-01-31 15:22:06">2026-01-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/01/19/php%E5%91%BD%E4%BB%A42/" title="简单的php命令（二）"><img src="/image/doro.gif" data-lazy-src="/image/20.avif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="简单的php命令（二）"/></a><div class="content"><a class="title" href="/2026/01/19/php%E5%91%BD%E4%BB%A42/" title="简单的php命令（二）">简单的php命令（二）</a><time datetime="2026-01-19T12:27:15.000Z" title="发表于 2026-01-19 20:27:15">2026-01-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/12/14/php%E5%91%BD%E4%BB%A41/" title="简单的php命令（一）"><img src="/image/doro.gif" data-lazy-src="/image/2.avif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="简单的php命令（一）"/></a><div class="content"><a class="title" href="/2025/12/14/php%E5%91%BD%E4%BB%A41/" title="简单的php命令（一）">简单的php命令（一）</a><time datetime="2025-12-14T13:57:58.000Z" title="发表于 2025-12-14 21:57:58">2025-12-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/20/%E8%AE%A4%E8%AF%86Web/" title="对Web的初次攻略"><img src="/image/doro.gif" data-lazy-src="/image/9.avif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="对Web的初次攻略"/></a><div class="content"><a class="title" href="/2025/11/20/%E8%AE%A4%E8%AF%86Web/" title="对Web的初次攻略">对Web的初次攻略</a><time datetime="2025-11-20T14:51:54.000Z" title="发表于 2025-11-20 22:51:54">2025-11-20</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Garlic-dove</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.1"></script><script src="/js/main.js?v=5.5.1"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0.33/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="9605021877" data-server="tencent" data-type="playlist" data-fixed="true" data-autoplay="true" data-lrcType="-1"> </div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-fluttering-ribbon.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: true,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      true
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.1"></script></div></div></body></html>
